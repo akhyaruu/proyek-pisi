@@ -5,8 +5,7 @@ class User extends CI_Controller {
 
 	public function index()
 	{
-		$data['mahasiswa'] = $this->UserModel->getData();
-		$this->load->view('contoh_view', $data);
+		$this->load->view('contoh_view');
    }
    
    
