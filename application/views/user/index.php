@@ -7,6 +7,18 @@
             </button>
          </div>
       </div>
+    <?php if ($this->session->flashdata('flash')):?>
+        <div class="row mt-3">
+            <div class="col-md-6">
+                <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                    <strong>berhasil</strong> <?= $this->session->flashdata('flash'); ?>
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                </div>    
+            </div>
+        </div>
+    <?php endif; ?>
       <table class="table table-bordered">
          <thead>
             <tr>
@@ -48,10 +60,9 @@
                </button>
             </div>
          <h1>
-         proyekpisi
          </h1>
-               <form action="" method="post">
-                  <input type="hidden" name='id' id='id'>
+               <form action="<?php echo base_url(); ?>user/tambah" method="post">
+                  <input type="hidden" name='id' id='id' value="1">
                   <div class="form-group">
                      <label for="nama_ukm">Nama Ukm</label>
                      <input type="text" class="form-control" id="nama_ukm" name="nama_ukm">
@@ -61,7 +72,7 @@
                      <input type="text" class="form-control" id="nama_kegiatan" name="nama_kegiatan">
                   </div>
                   <div class="form-group">
-                     <label for="email">Tanggal</label>
+                     <label for="datepicker">Tanggal</label>
                      <input type="text" class="form-control" id="datepicker" name="datepicker">
                   </div>
                   <div class="form-group">
@@ -69,17 +80,17 @@
                      <select class="form-control" id="kategori" name="kategori">
                         
                         <?php foreach($fakultas as $fk): ?>
-                            <option><?= $fk['NAMA_FAKULTAS']?></option>
+                            <option value="<?= $fk['ID_FAKULTAS']?>"><?= $fk['NAMA_FAKULTAS']?></option>
                         <?php endforeach; ?>
                     
                      </select>
                   </div>
-                  <form>
+                  
                      <div class="form-group">
                         <label for="exampleFormControlFile1">Upload Proposal</label>
                         <input type="file" class="form-control-file" id="exampleFormControlFile1">
                      </div>
-                  </form>
+                  
 
             </div>
             <div class="modal-footer">
@@ -90,3 +101,4 @@
          </div>
       </div>
    </div>
+   

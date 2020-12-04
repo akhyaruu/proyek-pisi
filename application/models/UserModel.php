@@ -5,15 +5,16 @@ class UserModel extends CI_Model {
    {
       return $this->db->get('fakultas')->result_array();
    }
-   public function tambahUser() 
+   public function tambahPengajuan() 
    {
       $data = [
-         "nama" => $this->input->post('nama', true),
-         "nip" => $this->input->post('nip', true),
-         "email" => $this->input->post('email', true),
-         "jurusan" => $this->input->post('jurusan', true),
+         "ID_USER" => $this->input->post('id', true),
+         "NAMA_UKM" => $this->input->post('nama_ukm', true),
+         "ID_FAKULTAS" => $this->input->post('kategori', true),
+         "NAMA_ACARA" => $this->input->post('nama_kegiatan', true),
+         "TGL_ACARA" => $this->input->post('datepicker', true),
      ];
-     $this->db->insert('mahasiswa', $data);
+     $this->db->insert('pengajuan', $data);
    }
 
 }
