@@ -81,7 +81,7 @@
                         <option>Tarbiah</option>
                         <option>Ushuluddin</option>
                         <option>Febi</option>
-                        <option>Humaniora</option>
+                    
                      </select>
                   </div>
                   <form>
