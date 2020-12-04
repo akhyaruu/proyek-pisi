@@ -65,13 +65,12 @@
                      <input type="text" class="form-control" id="datepicker" name="datepicker">
                   </div>
                   <div class="form-group">
-                     <label for="jurusan">Pilih Kategori</label>
-                     <select class="form-control" id="jurusan" name="jurusan">
-                        <option>Universitas</option>
-                        <option>Sains dan teknologi</option>
-                        <option>Tarbiah</option>
-                        <option>Ushuluddin</option>
-                        <option>Febi</option>
+                     <label for="kategori">Pilih Kategori</label>
+                     <select class="form-control" id="kategori" name="kategori">
+                        
+                        <?php foreach($fakultas as $fk): ?>
+                            <option><?= $fk['NAMA_FAKULTAS']?></option>
+                        <?php endforeach; ?>
                     
                      </select>
                   </div>

@@ -5,8 +5,16 @@ class User extends CI_Controller {
 
 	public function index()
 	{
-		$this->load->view('contoh_view');
+		$data['fakultas'] = $this->UserModel->getData();
+		$this->load->view('themes/user/header');
+		$this->load->view('user/index', $data);
+		$this->load->view('themes/user/footer');
    }
-   
+
+   public function tambah(){
+	$this->UserModel->tambahUser();
+	$this->session->set_flashdata('flash', 'Ditambahkan');
+	redirect('user');
+   }
    
 }
