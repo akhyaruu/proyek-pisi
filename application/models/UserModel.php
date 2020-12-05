@@ -1,11 +1,15 @@
 <?php 
 class UserModel extends CI_Model {
    
-   public function getData() 
+   public function getData($limit, $start) 
    {
-      $x = array($this->db->get('pengajuan')->result_array(), $this->db->get('fakultas')->result_array()) ;
+      $x = array($this->db->get('pengajuan',$limit, $start)->result_array(), $this->db->get('fakultas')->result_array()) ;
       
       return $x;
+   }
+   public function getCountData() 
+   {
+      return $this->db->get('pengajuan')->num_rows();
    }
    public function tambahPengajuan() 
    {

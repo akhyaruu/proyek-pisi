@@ -23,7 +23,7 @@
       <table class="table table-bordered">
          <thead>
             <tr>
-               
+            <th scope="col" class="table-dark">No</th>
                <th scope="col" class="table-dark">Nama Ukm</th>
                <th scope="col" class="table-dark">Nama Kegiatan</th>
                <th scope="col" class="table-dark">Tgl Kegiatan</th>
@@ -34,7 +34,7 @@
          <tbody>
          <?php foreach($x['0'] as $pj): ?>
             <tr>
-               
+                  <td><?= ++$start?></td>
                   <td><?= $pj['NAMA_UKM']?></td>
                   <td><?= $pj['NAMA_ACARA']?></td>
                   <td><?= $pj['TGL_ACARA']?></td>
@@ -45,15 +45,8 @@
             <?php endforeach; ?>
          </tbody>
       </table>
-      <nav aria-label="Page navigation example">
-         <ul class="pagination">
-            <li class="page-item"><a class="page-link" href="#">Previous</a></li>
-            <li class="page-item"><a class="page-link" href="#">1</a></li>
-            <li class="page-item"><a class="page-link" href="#">2</a></li>
-            <li class="page-item"><a class="page-link" href="#">3</a></li>
-            <li class="page-item"><a class="page-link" href="#">Next</a></li>
-         </ul>
-      </nav>
+      <?= $this->pagination->create_links(); ?>
+     
    </div>
    <!-- Modal -->
    <div class="modal fade" id="formModal" tabindex="-1" aria-labelledby="judulModal" aria-hidden="true">
