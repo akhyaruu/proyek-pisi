@@ -28,6 +28,7 @@
                <th scope="col" class="table-dark">Nama Kegiatan</th>
                <th scope="col" class="table-dark">Tgl Kegiatan</th>
                <th scope="col" class="table-dark">Status</th>
+               <th scope="col" class="table-dark">Upload</th>
             </tr>
          </thead>
          <tbody>
@@ -37,8 +38,9 @@
                   <td><?= $pj['NAMA_UKM']?></td>
                   <td><?= $pj['NAMA_ACARA']?></td>
                   <td><?= $pj['TGL_ACARA']?></td>
-                  <td><?= $pj['STATUS_PENGAJUAN']?> <button type="file" class="btn btn-danger float-right">SPJ</button></td>
-               
+                  <td><?= $pj['STATUS_PENGAJUAN']?> </td>
+                  <td><button type="file" class="btn btn-danger ml-1">REVISI</button>
+                  <button type="file" class="btn btn-primary">SPJ</button></td>
             </tr>
             <?php endforeach; ?>
          </tbody>
