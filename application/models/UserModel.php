@@ -24,5 +24,10 @@ class UserModel extends CI_Model {
      ];
      $this->db->insert('pengajuan', $data);
    }
+   public function hapusDataPj($id)
+    {
+        // $this->db->where('id', $id);
+        $this->db->delete('pengajuan', ['ID_PENGAJUAN' => $id]);
+    }
 
 }

@@ -57,5 +57,11 @@ class User extends CI_Controller {
 	$this->session->set_flashdata('flash', 'Ditambahkan');
 	redirect('user');
    }
+   public function hapus($id)
+    {
+        $this->UserModel->hapusDataPj($id);
+        $this->session->set_flashdata('flash', 'Dihapus');
+        redirect('user');
+    }
    
 }

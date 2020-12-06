@@ -39,8 +39,13 @@
                   <td><?= $pj['NAMA_ACARA']?></td>
                   <td><?= $pj['TGL_ACARA']?></td>
                   <td><?= $pj['STATUS_PENGAJUAN']?> </td>
-                  <td><button type="file" class="btn btn-danger ml-1">REVISI</button>
-                  <button type="file" class="btn btn-primary">SPJ</button></td>
+                  <td><a href="<?=base_url(); ?>user/hapus/<?= $pj['ID_PENGAJUAN']; ?>"n
+                        class="badge badge-danger tombol-hapus ml-1" onclick="return confirm('y cvakin');">hapus</a>
+                     <a href=""
+                        class="badge badge-success ml-1">revisi</a>
+                     <a href=""
+                        class="badge badge-primary ml-1">spj</a>
+                     </td>
             </tr>
             <?php endforeach; ?>
          </tbody>
