@@ -11,7 +11,7 @@ class UserModel extends CI_Model {
    {
       return $this->db->get('pengajuan')->num_rows();
    }
-   public function tambahPengajuan() 
+   public function tambahPengajuan($namaBerkas) 
    {
       $data = [
          "ID_USER" => $this->input->post('id', true),
@@ -20,8 +20,9 @@ class UserModel extends CI_Model {
          "NAMA_ACARA" => $this->input->post('nama_kegiatan', true),
          "TGL_PENGAJUAN" => date("y-m-d"),
          "TGL_ACARA" => $this->input->post('datepicker', true),
-         "STATUS_PENGAJUAN" => "Antri"
-     ];
+         "STATUS_PENGAJUAN" => "Antri",
+         "URL_PENGAJUAN" => $namaBerkas
+      ];
      $this->db->insert('pengajuan', $data);
    }
    public function hapusDataPj($id)

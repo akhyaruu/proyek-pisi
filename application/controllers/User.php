@@ -2,12 +2,7 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class User extends CI_Controller {
-	public function __construct(){
-		parent::__construct();
-		$this->load->model('UserModel');
-		
-	}
-
+	
 	public function index()
 	{
 		//pagination
@@ -53,15 +48,27 @@ class User extends CI_Controller {
    }
 
    public function tambah(){
-	$this->UserModel->tambahPengajuan();
-	$this->session->set_flashdata('flash', 'Ditambahkan');
-	redirect('user');
-   }
+		$config['upload_path']          = './uploads/';
+		$config['allowed_types']        = 'pdf';
+		$config['max_size']             = 2500;
+		
+		$this->upload->initialize($config);
+		if(!$this->upload->do_upload('proposal')) {
+			$this->session->set_flashdata('flash', 'Data Gagal Ditambahkan');
+			redirect('user');	
+		} else {
+			$namaBerkas = $this->upload->data("file_name");
+			$this->UserModel->tambahPengajuan($namaBerkas);
+			$this->session->set_flashdata('flash', 'Ditambahkan');
+			redirect('user');	
+		}
+	}
+	
    public function hapus($id)
-    {
-        $this->UserModel->hapusDataPj($id);
-        $this->session->set_flashdata('flash', 'Dihapus');
-        redirect('user');
-    }
+   {
+		$this->UserModel->hapusDataPj($id);
+		$this->session->set_flashdata('flash', 'Dihapus');
+		redirect('user');
+   }
    
 }
