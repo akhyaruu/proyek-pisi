@@ -19,8 +19,8 @@
                                     </div>
                                     <form class="user">
                                         <div class="form-group">
-                                            <input type="email" class="form-control form-control-user"
-                                                id="exampleInputEmail" aria-describedby="emailHelp"
+                                            <input type="text" class="form-control form-control-user"
+                                                id="username" name="username" aria-describedby="emailHelp"
                                                 placeholder="NIM/NIP">
                                         </div>
                                         <div class="form-group">
@@ -28,9 +28,9 @@
                                                 id="exampleInputPassword" placeholder="Password">
                                         </div>
 
-                                        <a href="index.html" class="btn btn-primary btn-user btn-block">
+                                        <button type="submit" href="index.html" class="btn btn-primary btn-user btn-block">
                                             Login
-                                        </a>
+                                        </button>
                                       
                                         
                                        
