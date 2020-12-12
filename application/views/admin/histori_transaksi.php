@@ -2,7 +2,7 @@
 
    <!-- Page Heading -->
    <div class="d-sm-flex align-items-center justify-content-between mb-4">
-      <h1 class="h3 mb-0 text-gray-800">Daftar Pengajuan Baru</h1>
+      <h1 class="h3 mb-0 text-gray-800">Histori Transaksi Pengajuan</h1>
    </div>
 
    <div class="row">
@@ -38,32 +38,12 @@
                            <td>1</td>
                            <td>Ilham</td>
                            <td>UQPI</td>
-                           <td>Kegiatan Baru</td>
-                           <td>12-01-2000</td>
-                           <td class="text-secondary"><i class="fas fa-hourglass-half"></i> Antri</td>
+                           <td>Akhir Tahun</td>
+                           <td>12-07-2015</td>
+                           <td class="text-success">Selesai</td>
                            <td>
-                              <button class="btn btn-sm btn-primary">Download File</button>
-                              <button class="btn btn-sm btn-success" data-toggle="modal"
-                                 data-target="#modalPersetujuan">Disetujui</button>
-                              <button class="btn btn-sm btn-warning" data-toggle="modal"
-                                 data-target="#modalRevisi">Revisi</button>
-                              <button class="btn btn-sm btn-danger">Hapus</button>
-                           </td>
-                        </tr>
-                        <tr>
-                           <td>1</td>
-                           <td>Ilham</td>
-                           <td>UQPI</td>
-                           <td>Kegiatan Baru</td>
-                           <td>12-01-2000</td>
-                           <td class="text-warning"><i class="fas fa-undo"></i> Revisi Pengajuan</td>
-                           <td>
-                              <button class="btn btn-sm btn-primary">Download File</button>
-                              <button class="btn btn-sm btn-success" data-toggle="modal"
-                                 data-target="#modalPersetujuan">Disetujui</button>
-                              <button class="btn btn-sm btn-warning" data-toggle="modal"
-                                 data-target="#modalRevisi">Revisi</button>
-                              <button class="btn btn-sm btn-danger">Hapus</button>
+                              <button class="btn btn-sm btn-primary">Download Pengajuan</button>
+                              <button class="btn btn-sm btn-primary">Download SPJ</button>
                            </td>
                         </tr>
 
