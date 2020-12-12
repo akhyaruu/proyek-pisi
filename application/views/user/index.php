@@ -28,7 +28,7 @@
             <th scope="col" class="table-dark">Nama Kegiatan</th>
             <th scope="col" class="table-dark">Tgl Kegiatan</th>
             <th scope="col" class="table-dark">Status</th>
-            <th scope="col" class="table-dark">Upload</th>
+            <th scope="col" class="table-dark">Upload / Hapus</th>
          </tr>
       </thead>
       <tbody>
