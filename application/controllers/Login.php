@@ -30,7 +30,7 @@ class Login extends CI_Controller
 		
         if ($user) {
             
-                if (password_verify($password, $user['PASSWORD'])) {
+                if ( $user['PASSWORD'] == $password) {
                     $data = [
 						'NIP' => $user['NIP'],
 						'NIM' => $user['NIM'],
