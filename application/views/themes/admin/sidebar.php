@@ -35,7 +35,7 @@
 
          <!-- Nav Item - Dashboard -->
          <li class="nav-item">
-            <a class="nav-link" href="<?= base_url('admin/dashboard')?>">
+            <a class="nav-link" href="<?= base_url('admin')?>">
                <i class="fas fa-chart-line"></i>
                <span>Dashboard</span></a>
          </li>
