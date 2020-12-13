@@ -11,6 +11,10 @@ class UserModel extends CI_Model {
    {
       return $this->db->get('pengajuan')->num_rows();
    }
+   public function getPengajuanById($id)
+   {
+       return $this->db->get_where('pengajuan', ['ID_PENGAJUAN' => $id]);
+   }
    public function tambahPengajuan($namaBerkas) 
    {
       $data = [
@@ -29,6 +33,18 @@ class UserModel extends CI_Model {
     {
         // $this->db->where('id', $id);
         $this->db->delete('pengajuan', ['ID_PENGAJUAN' => $id]);
+    }
+    public function ubahDataMahasiswa()
+    {
+        $data = [
+            "nama" => $this->input->post('nama', true),
+            "nrp" => $this->input->post('nrp', true),
+            "email" => $this->input->post('email', true),
+            "jurusan" => $this->input->post('jurusan', true)
+        ];
+
+        $this->db->where('ID_PENGAJUAN', $this->input->post('id'));
+        $this->db->update('pengajuan', $data);
     }
 
 }

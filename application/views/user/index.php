@@ -3,17 +3,18 @@
 
    <div class="row mb-3">
       <div class="col-lg-6">
-         <button type="button" class="btn btn-primary btnTambah" data-toggle="modal" data-target="#formModal">
+         <button type="button" class="btn btn-primary tombolTambahData" data-toggle="modal" data-target="#formModal">
             tambah data
          </button>
       </div>
    </div>
    <?php if ($this->session->flashdata('pesan')):?>
+     
    <div class="row mt-3">
       <div class="col-md-6">
          
              <?= $this->session->flashdata('pesan'); ?>
-            
+             
       </div>
    </div>
    <?php endif; ?>
@@ -39,6 +40,9 @@
             <td><a href="<?=base_url(); ?>user/hapus/<?= $pj['ID_PENGAJUAN']; ?>" n
                   class="badge badge-danger tombol-hapus ml-1"
                   onclick="return confirm('apakah kamu yakin menghapus pengajuan ini');">hapus</a>
+               <a href="<?=base_url(); ?>user/ubah/<?= $pj['ID_PENGAJUAN']; ?>" n
+                  class="badge badge-warning tombol-hapus ml-1 tampilModalUbah"
+                  data-toggle="modal" data-target="#formModal" data-id="<?= $pj['ID_PENGAJUAN']; ?>">ubah</a>
                <a href="" class="badge badge-success ml-1">revisi</a>
                <a href="" class="badge badge-primary ml-1">spj</a>
             </td>
@@ -54,7 +58,7 @@
    <div class="modal-dialog">
       <div class="modal-content">
          <div class="modal-header">
-            <h5 class="modal-title" id="judulModalLabel">Tambah Data Pengajuan</h5>
+            <h5 class="modal-title" id="formModalLabel">Tambah Data Pengajuan</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                <span aria-hidden="true">&times;</span>
             </button>
@@ -65,6 +69,7 @@
                <div class="form-group">
                   <label for="nama_ukm">Nama Ukm</label>
                   <input type="text" class="form-control" id="nama_ukm" name="nama_ukm">
+                   
                </div>
                <div class="form-group">
                   <label for="nama_kegiatan">Nama Kegiatan</label>
@@ -94,6 +99,7 @@
             <button type="submit" class="btn btn-primary">Tambah Data</button>
          </div>
          </form>
+         
       </div>
    </div>
 </div>
