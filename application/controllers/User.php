@@ -54,12 +54,12 @@ class User extends CI_Controller {
 		
 		$this->upload->initialize($config);
 		if(!$this->upload->do_upload('proposal')) {
-			$this->session->set_flashdata('flash', 'Data Gagal Ditambahkan');
+			$this->session->set_flashdata('pesan', '<div class="alert alert-danger" role="alert">gagal ditambahkan</div>');
 			redirect('user');	
 		} else {
 			$namaBerkas = $this->upload->data("file_name");
 			$this->UserModel->tambahPengajuan($namaBerkas);
-			$this->session->set_flashdata('flash', 'Ditambahkan');
+			$this->session->set_flashdata('pesan', '<div class="alert alert-danger" role="alert">berhasil ditambahkan</div>');
 			redirect('user');	
 		}
 	}

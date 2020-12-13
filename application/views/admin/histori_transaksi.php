@@ -2,7 +2,7 @@
 
    <!-- Page Heading -->
    <div class="d-sm-flex align-items-center justify-content-between mb-4">
-      <h1 class="h3 mb-0 text-gray-800">Daftar Pengajuan Baru</h1>
+      <h1 class="h3 mb-0 text-gray-800">Histori Transaksi Pengajuan</h1>
    </div>
 
    <div class="row">
@@ -25,80 +25,27 @@
                      <thead class="thead-dark">
                         <tr>
                            <th scope="col">No.</th>
-
-                           <th scope="col">Nama Pengaju</th>
-                           <th scope="col">Nama UKM</th>
-                           <th scope="col">Nama Acara</th>
-
                            <th scope="col">Pengaju</th>
                            <th scope="col">UKM</th>
                            <th scope="col">Kegiatan</th>
                            <th scope="col">Tgl Acara</th>
                            <th scope="col">Status</th>
-
                            <th scope="col">Aksi</th>
                         </tr>
                      </thead>
                      <tbody id="tBodyTransaksi">
-
-                    <?php foreach ($pengajuan as $pengajuan) :?>
-                        <tr>
-                            <td>Ilham</td>
-                           <td>
-                              <?php echo $pengajuan->nama_pengaju ?>
-                           </td>
-                           <td>
-                             <?php echo $pengajuan->nama_ukm ?>
-                           </td>
-                           <td>
-                              <?php echo $pengajuan->nama_acara ?>
-                           </td>
-                        
-                        <td>Ilham</td>
-                        <td>Ilham</td>
-                        <td>Ilham</td>
-                        <td>
-                           <button class="btn btn-sm btn-info">Download Pengajuan</button>
-                           <button class="btn btn-sm btn-success">Disetujui</button>
-                           <button class="btn btn-sm btn-warning">Revisi</button>
-                           <button class="btn btn-sm btn-danger float-right">Tolak</button>
-                        </td>
-                         </tr> 
-                         <?php endforeach; ?>
-
                         <tr>
                            <td>1</td>
                            <td>Ilham</td>
                            <td>UQPI</td>
-                           <td>Kegiatan Baru</td>
-                           <td>12-01-2000</td>
-                           <td class="text-secondary"><i class="fas fa-hourglass-half"></i> Antri</td>
+                           <td>Akhir Tahun</td>
+                           <td>12-07-2015</td>
+                           <td class="text-success">Selesai</td>
                            <td>
-                              <button class="btn btn-sm btn-primary">Download File</button>
-                              <button class="btn btn-sm btn-success" data-toggle="modal"
-                                 data-target="#modalPersetujuan">Disetujui</button>
-                              <button class="btn btn-sm btn-warning" data-toggle="modal"
-                                 data-target="#modalRevisi">Revisi</button>
-                              <button class="btn btn-sm btn-danger">Hapus</button>
+                              <button class="btn btn-sm btn-primary">Download Pengajuan</button>
+                              <button class="btn btn-sm btn-primary">Download SPJ</button>
                            </td>
                         </tr>
-                        <tr>
-                           <td>1</td>
-                           <td>Ilham</td>
-                           <td>UQPI</td>
-                           <td>Kegiatan Baru</td>
-                           <td>12-01-2000</td>
-                           <td class="text-warning"><i class="fas fa-undo"></i> Revisi Pengajuan</td>
-                           <td>
-                              <button class="btn btn-sm btn-primary">Download File</button>
-                              <button class="btn btn-sm btn-success" data-toggle="modal"
-                                 data-target="#modalPersetujuan">Disetujui</button>
-                              <button class="btn btn-sm btn-warning" data-toggle="modal"
-                                 data-target="#modalRevisi">Revisi</button>
-                              <button class="btn btn-sm btn-danger">Hapus</button>
-                           </td>
-                        </tr>
-
 
 
                      </tbody>

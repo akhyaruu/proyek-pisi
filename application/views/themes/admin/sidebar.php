@@ -13,6 +13,7 @@
       href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
       rel="stylesheet">
    <link href="<?= base_url('assets/admin/css/sb-admin-2.min.css')?>" rel="stylesheet">
+   <script src="<?= base_url()?>assets/admin/vendor/jquery/jquery.min.js"></script>
 </head>
 
 <body id="page-top">
@@ -34,7 +35,7 @@
 
          <!-- Nav Item - Dashboard -->
          <li class="nav-item">
-            <a class="nav-link" href="<?= base_url('admin/dashboard')?>">
+            <a class="nav-link" href="<?= base_url('admin')?>">
                <i class="fas fa-chart-line"></i>
                <span>Dashboard</span></a>
          </li>
@@ -59,7 +60,7 @@
                <span>Transaksi Pengajuan</span></a>
          </li>
          <li class="nav-item">
-            <a class="nav-link" href="<?= base_url('admin/pengajuanbaru')?>">
+            <a class="nav-link" href="<?= base_url('admin/historitransaksi')?>">
                <i class="fas fa-history"></i>
                <span>Histori Transaksi</span></a>
          </li>
