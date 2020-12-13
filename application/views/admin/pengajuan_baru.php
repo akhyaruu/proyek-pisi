@@ -32,13 +32,25 @@
                         <tr>
                            <th scope="col">No.</th>
                            <th scope="col">Nama Pengaju</th>
-                           <th scope="col">UKM</th>
-                           <th scope="col">Kegiatan</th>
+                           <th scope="col">Nama UKM</th>
+                           <th scope="col">Nama Acara</th>
                            <th scope="col">Aksi</th>
                         </tr>
                      </thead>
                      <tbody id="tBodyTransaksi">
-                        <td>Ilham</td>
+                    <?php foreach ($pengajuan as $pengajuan) :?>
+                        <tr>
+                            <td>Ilham</td>
+                           <td>
+                              <?php echo $pengajuan->nama_pengaju ?>
+                           </td>
+                           <td>
+                             <?php echo $pengajuan->nama_ukm ?>
+                           </td>
+                           <td>
+                              <?php echo $pengajuan->nama_acara ?>
+                           </td>
+                        
                         <td>Ilham</td>
                         <td>Ilham</td>
                         <td>Ilham</td>
@@ -48,6 +60,8 @@
                            <button class="btn btn-sm btn-warning">Revisi</button>
                            <button class="btn btn-sm btn-danger float-right">Tolak</button>
                         </td>
+                         </tr> 
+                         <?php endforeach; ?>
                      </tbody>
                   </table>
                </div>
