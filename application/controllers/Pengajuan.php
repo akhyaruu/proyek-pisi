@@ -13,7 +13,7 @@ class Pengajuan extends CI_Controller {
     //mengambil data dari model
     public function index(){
         $data["pengajuan"] = $this->AdminModel->getAll();
-        $this->load->view("admin/pengajuan_baru", $data);
+        $this->load->view("admin/pengajuan_baru",$data);
     }
 }
 
