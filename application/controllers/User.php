@@ -87,7 +87,35 @@ class User extends CI_Controller {
    public function getubah()
    {
 	 
-	   echo json_encode($this->UserModel->getPengajuanById($_POST['id']));
+	 echo json_encode($this->UserModel->getPengajuanById($_POST['id']));
+   }
+
+   public function ubah()
+   {
+	 
+	$config['upload_path']          = './uploads/';
+	$config['allowed_types']        = 'pdf';
+	$config['max_size']             = 2500;
+	$this->form_validation->set_rules('nama_ukm', 'Nama UKM', 'trim|required');
+	$this->form_validation->set_rules('nama_kegiatan', 'Nama Acara', 'trim|required');
+	$this->form_validation->set_rules('datepicker', 'Tanggal acara', 'trim|required');
+
+	
+	$this->upload->initialize($config);
+if ($this->form_validation->run() == false) {
+	$this->session->set_flashdata('pesan', '<div class="alert alert-danger" role="alert">gagal ditambahkan pastikan data terisi dengan benar</div>');
+	redirect('user');	
+} else {
+	if(!$this->upload->do_upload('proposal')) {
+		$this->session->set_flashdata('pesan', '<div class="alert alert-danger" role="alert">anda belum melampirkan proposal</div>');
+		redirect('user');	
+	} else {
+		$namaBerkas = $this->upload->data("file_name");
+		$this->UserModel->ubahDataPengajuan($namaBerkas);
+		$this->session->set_flashdata('pesan', '<div class="alert alert-success" role="alert">berhasil diupdate</div>');
+		redirect('user');	
+	}
+}
    }
 
   

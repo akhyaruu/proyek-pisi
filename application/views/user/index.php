@@ -27,7 +27,7 @@
             <th scope="col" class="table-dark">Nama Kegiatan</th>
             <th scope="col" class="table-dark">Tgl Kegiatan</th>
             <th scope="col" class="table-dark">Status</th>
-            <th scope="col" class="table-dark">Upload / Hapus</th>
+            <th scope="col" class="table-dark">Upload / Aksi</th>
          </tr>
       </thead>
       <tbody>
@@ -95,6 +95,7 @@
                <div class="form-group">
                   <label for="exampleFormControlFile1">Upload Proposal</label>
                   <input type="file" class="form-control-file" id="exampleFormControlFile1" name="proposal">
+                  <small class="form-text text-danger">Harus berformat PDF</small>
                </div>
 
          </div>

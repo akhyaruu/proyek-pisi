@@ -3,11 +3,7 @@ $(function() {
     $('.tombolTambahData').on('click', function() {
         $('#formModalLabel').html('Tambah Data Mahasiswa');
         $('.modal-footer button[type=submit]').html('Tambah Data');
-        $('#nama').val('');
-        $('#nrp').val('');
-        $('#email').val('');
-        $('#jurusan').val('');
-        $('#id').val('');
+        
     });
 
 
@@ -26,11 +22,10 @@ $(function() {
             dataType: 'json',
             success: function(data) {
                 console.log(data);
-                $('#nama_ukm').val(data.nama_ukm);
-                $('#nama_kegiatan').val(data.nama_acara);
-                $('#datepicker').val(data.tgl_acara);
-                $('#kategori').val(data.id_fakultas);
-                $('#id').val(data.id_pengajuan);
+                $('#nama_ukm').val(data.NAMA_UKM);
+                $('#nama_kegiatan').val(data.NAMA_ACARA);
+                $('#datepicker').val(data.TGL_ACARA);
+                $('#id').val(data.ID_PENGAJUAN);
             }
         });
         

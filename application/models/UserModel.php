@@ -13,7 +13,7 @@ class UserModel extends CI_Model {
    }
    public function getPengajuanById($id)
    {
-       return $this->db->get_where('pengajuan', ['ID_PENGAJUAN' => $id]);
+       return $this->db->get_where('pengajuan', ['ID_PENGAJUAN' => $id])->row_array();
    }
    public function tambahPengajuan($namaBerkas) 
    {
@@ -34,13 +34,15 @@ class UserModel extends CI_Model {
         // $this->db->where('id', $id);
         $this->db->delete('pengajuan', ['ID_PENGAJUAN' => $id]);
     }
-    public function ubahDataMahasiswa()
+    public function ubahDataPengajuan($namaBerkas)
     {
         $data = [
-            "nama" => $this->input->post('nama', true),
-            "nrp" => $this->input->post('nrp', true),
-            "email" => $this->input->post('email', true),
-            "jurusan" => $this->input->post('jurusan', true)
+            "ID_FAKULTAS" => $this->input->post('kategori', true),
+            "NAMA_UKM" => $this->input->post('nama_ukm', true),
+            "NAMA_ACARA" => $this->input->post('nama_kegiatan', true),
+            "TGL_ACARA" => $this->input->post('datepicker', true),
+            "URL_PENGAJUAN" => $namaBerkas
+            
         ];
 
         $this->db->where('ID_PENGAJUAN', $this->input->post('id'));
