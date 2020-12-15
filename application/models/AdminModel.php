@@ -14,9 +14,10 @@ class AdminModel extends CI_Model {
     {
         return $this->db->get($this->_table)->result();
     }
+
     public function getById($id)
     {
-        return $this->db->get_where($this->_table, ["pengajuan" => $id_pengajuan]) ->row();
+        return $this->db->get_where($this->_table, ["pengajuan" => $id])->row();
     }
 
 
