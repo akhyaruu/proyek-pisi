@@ -10,12 +10,12 @@
       </div>
    </div>
    <?php if ($this->session->flashdata('pesan')):?>
-     
+
    <div class="row mt-3">
       <div class="col-md-6">
-         
-             <?= $this->session->flashdata('pesan'); ?>
-             
+
+         <?= $this->session->flashdata('pesan'); ?>
+
       </div>
    </div>
    <?php endif; ?>
@@ -42,12 +42,12 @@
                   class="badge badge-danger tombol-hapus ml-1"
                   onclick="return confirm('apakah kamu yakin menghapus pengajuan ini');">hapus</a>
                <a href="<?=base_url(); ?>user/ubah/<?= $pj['ID_PENGAJUAN']; ?>" n
-                  class="badge badge-warning tombol-hapus ml-1 tampilModalUbah"
-                  data-toggle="modal" data-target="#formModal" data-id="<?= $pj['ID_PENGAJUAN']; ?>">ubah</a>
+                  class="badge badge-warning tombol-hapus ml-1 tampilModalUbah" data-toggle="modal"
+                  data-target="#formModal" data-id="<?= $pj['ID_PENGAJUAN']; ?>">ubah</a>
                <?php if ($pj['STATUS_PENGAJUAN'] == 'revisi') : ?>
-                 <a href="" class="badge badge-success ml-1">revisi</a>
+               <a href="" class="badge badge-success ml-1">revisi</a>
                <?php endif; ?>
-               
+
                <a href="" class="badge badge-primary ml-1">spj</a>
             </td>
          </tr>
@@ -55,6 +55,9 @@
       </tbody>
    </table>
    <?= $this->pagination->create_links(); ?>
+
+   <!-- logout -->
+   <a href="<?= base_url('login/logout')?>"><button class="btn btn-warning mb-3">Keluar</button></a>
 
 </div>
 <!-- Modal -->
@@ -73,7 +76,7 @@
                <div class="form-group">
                   <label for="nama_ukm">Nama Ukm</label>
                   <input type="text" class="form-control" id="nama_ukm" name="nama_ukm">
-                   
+
                </div>
                <div class="form-group">
                   <label for="nama_kegiatan">Nama Kegiatan</label>
@@ -104,7 +107,7 @@
             <button type="submit" class="btn btn-primary">Tambah Data</button>
          </div>
          </form>
-         
+
       </div>
    </div>
 </div>
