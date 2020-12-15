@@ -30,8 +30,10 @@ class Login extends CI_Controller
 		
         if ($user) {
             
-                if ( $user['PASSWORD'] == $password) {
+                if ($user['PASSWORD'] == $password) {
                     $data = [
+                        'ID_USER' => $user['ID_USER'],
+                        'NAMA_USER' => $user['NAMA_USER'],
 						'NIP' => $user['NIP'],
 						'NIM' => $user['NIM'],
                         'LEVEL' => $user['LEVEL']

@@ -18,7 +18,7 @@ class UserModel extends CI_Model {
    public function tambahPengajuan($namaBerkas) 
    {
       $data = [
-         "ID_USER" => $this->input->post('id', true),
+         "ID_USER" =>  $this->session->userdata('ID_USER'),
          "ID_FAKULTAS" => $this->input->post('kategori', true),
          "NAMA_UKM" => $this->input->post('nama_ukm', true),
          "NAMA_ACARA" => $this->input->post('nama_kegiatan', true),

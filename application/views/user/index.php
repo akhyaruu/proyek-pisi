@@ -1,6 +1,7 @@
 <div class="container mt-5">
    <h1>Form Pengajuan Kegiatan</h1>
-
+   <h2>NIM : <?=$this->session->userdata('NIM')?></h2>
+   <h2>Nama : <?=$this->session->userdata('NAMA_USER')?></h2>
    <div class="row mb-3">
       <div class="col-lg-6">
          <button type="button" class="btn btn-primary tombolTambahData" data-toggle="modal" data-target="#formModal">
@@ -43,7 +44,10 @@
                <a href="<?=base_url(); ?>user/ubah/<?= $pj['ID_PENGAJUAN']; ?>" n
                   class="badge badge-warning tombol-hapus ml-1 tampilModalUbah"
                   data-toggle="modal" data-target="#formModal" data-id="<?= $pj['ID_PENGAJUAN']; ?>">ubah</a>
-               <a href="" class="badge badge-success ml-1">revisi</a>
+               <?php if ($pj['STATUS_PENGAJUAN'] == 'revisi') : ?>
+                 <a href="" class="badge badge-success ml-1">revisi</a>
+               <?php endif; ?>
+               
                <a href="" class="badge badge-primary ml-1">spj</a>
             </td>
          </tr>
