@@ -3,6 +3,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class User extends CI_Controller {
 	
+	function __construct(){
+		parent::__construct();
+		if($this->session->userdata('STATUS') !== "login" && $this->session->userdata('LEVEL') !== "2"){
+			redirect('login');
+		}
+	}
+
 	public function index()
 	{
 		
