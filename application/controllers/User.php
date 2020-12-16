@@ -12,9 +12,9 @@ class User extends CI_Controller {
 
 	public function index()
 	{
-		
+		$id = $this->session->userdata('ID_USER');
 		$config['base_url'] = 'http://localhost/proyekpisi/user/index';
-		$config['total_rows'] = $this->UserModel->getCountData();
+		$config['total_rows'] = $this->UserModel->getCountData($id);
 		$config['per_page'] = 5;
 
 		$config['full_tag_open'] = '<nav><ul class="pagination">';
@@ -47,7 +47,7 @@ class User extends CI_Controller {
 		$this->pagination->initialize($config);
 		
 		$data['start'] = $this->uri->segment(3);
-		$data['x'] = $this->UserModel->getData($config['per_page'],$data['start']);
+		$data['x'] = $this->UserModel->getData($id,$config['per_page'],$data['start']);
 		//$data['fakultas'] = $this->UserModel->getData();
 	
 		$this->load->view('themes/user/header');
