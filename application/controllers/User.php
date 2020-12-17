@@ -5,8 +5,10 @@ class User extends CI_Controller {
 	
 	function __construct(){
 		parent::__construct();
-		if($this->session->userdata('STATUS') !== "login" && $this->session->userdata('LEVEL') !== "2"){
+		if($this->session->userdata('STATUS') !== TRUE && $this->session->userdata('LEVEL') !== "2"){
 			redirect('login');
+		}else {
+			$this->session->unset_userdata('STATUS');
 		}
 	}
 
@@ -123,6 +125,25 @@ if ($this->form_validation->run() == false) {
 		redirect('user');	
 	}
 }
+   }
+
+public function Revisi()
+   {
+	$config['upload_path']          = './uploads/';
+	$config['allowed_types']        = 'pdf';
+	$config['max_size']             = 2500;
+
+	$this->upload->initialize($config);
+
+	if(!$this->upload->do_upload('proposal')) {
+		$this->session->set_flashdata('pesan', '<div class="alert alert-danger" role="alert">anda belum melampirkan proposal</div>');
+		redirect('user');	
+	} else {
+		$namaBerkas = $this->upload->data("file_name");
+		$this->UserModel->ubahDataPengajuan($namaBerkas);
+		$this->session->set_flashdata('pesan', '<div class="alert alert-success" role="alert">berhasil diupdate</div>');
+		redirect('user');	
+	}
    }
 
   
