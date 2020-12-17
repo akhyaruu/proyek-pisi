@@ -9,6 +9,8 @@ class Admin extends CI_Controller {
 			redirect('login');
 		}
 	}
+   
+   var $active = 'active';
 
 	public function index()
 	{
@@ -20,7 +22,8 @@ class Admin extends CI_Controller {
 
    public function pengajuanbaru() 
    {
-      $this->load->view('themes/admin/sidebar');
+      $data = $this->active;
+      $this->load->view('themes/admin/sidebar', compact('data'));
       $this->load->view('themes/admin/topbar');
       $this->load->view('admin/pengajuan_baru');
       $this->load->view('themes/admin/footer');
