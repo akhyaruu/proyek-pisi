@@ -35,7 +35,7 @@ class Login extends CI_Controller
                     'NIP' => $user['NIP'],
                     'NIM' => $user['NIM'],
                     'LEVEL' => $user['LEVEL'],
-                    'STATUS'=> 'login' 
+                    'STATUS'=> TRUE 
                 ];
                 $this->session->set_userdata($data);
                 if ($user['LEVEL'] == 1) {
@@ -56,7 +56,7 @@ class Login extends CI_Controller
 
     public function logout()
     {
-        if($this->session->userdata('STATUS') == 'login') {
+        if($this->session->userdata('STATUS') == TRUE) {
             $data = array('ID_USER','NAMA_USER','NIP','NIM','LEVEL','STATUS');
             $this->session->unset_userdata($data);
             redirect('login');

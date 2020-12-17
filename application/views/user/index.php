@@ -45,7 +45,8 @@
                   class="badge badge-warning tombol-hapus ml-1 tampilModalUbah" data-toggle="modal"
                   data-target="#formModal" data-id="<?= $pj['ID_PENGAJUAN']; ?>">ubah</a>
                <?php if ($pj['STATUS_PENGAJUAN'] == 'revisi') : ?>
-               <a href="" class="badge badge-success ml-1">revisi</a>
+               <a href="" class="badge badge-success ml-1" data-toggle="modal"
+                  data-target="#formModalRevisi">revisi</a>
                <?php endif; ?>
 
                <a href="" class="badge badge-primary ml-1">spj</a>
@@ -60,53 +61,55 @@
    <a href="<?= base_url('login/logout')?>"><button class="btn btn-warning mb-3">Keluar</button></a>
 
 </div>
-<!-- Modal -->
-<div class="modal fade" id="formModal" tabindex="-1" aria-labelledby="judulModal" aria-hidden="true">
-   <div class="modal-dialog">
-      <div class="modal-content">
-         <div class="modal-header">
-            <h5 class="modal-title" id="formModalLabel">Tambah Data Pengajuan</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-               <span aria-hidden="true">&times;</span>
-            </button>
-         </div>
-         <div class="modal-body">
-            <form action="<?php echo base_url(); ?>user/tambah" method="post" enctype="multipart/form-data">
-               <input type="hidden" name='id' id='id' value="1">
-               <div class="form-group">
-                  <label for="nama_ukm">Nama Ukm</label>
-                  <input type="text" class="form-control" id="nama_ukm" name="nama_ukm">
 
-               </div>
-               <div class="form-group">
-                  <label for="nama_kegiatan">Nama Kegiatan</label>
-                  <input type="text" class="form-control" id="nama_kegiatan" name="nama_kegiatan">
-               </div>
-               <div class="form-group">
-                  <label for="datepicker">Tanggal</label>
-                  <input type="text" class="form-control" id="datepicker" name="datepicker">
-               </div>
-               <div class="form-group">
-                  <label for="kategori">Pilih Kategori</label>
-                  <select class="form-control" id="kategori" name="kategori">
-                     <?php foreach($x['1'] as $fk): ?>
-                     <option value="<?= $fk['ID_FAKULTAS']?>"><?= $fk['NAMA_FAKULTAS']?></option>
-                     <?php endforeach; ?>
-                  </select>
-               </div>
+         <div class="modal fade" id="formModal" tabindex="-1" aria-labelledby="judulModal" aria-hidden="true">
+            <div class="modal-dialog">
+               <div class="modal-content">
+                  <div class="modal-header">
+                     <h5 class="modal-title" id="formModalLabel">Tambah Data Pengajuan</h5>
+                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                     </button>
+                  </div>
+                  <div class="modal-body">
+                     <form action="<?php echo base_url(); ?>user/tambah" method="post" enctype="multipart/form-data">
+                        <input type="hidden" name='id' id='id' value="1">
+                        <div class="form-group">
+                           <label for="nama_ukm">Nama Ukm</label>
+                           <input type="text" class="form-control" id="nama_ukm" name="nama_ukm">
 
-               <div class="form-group">
-                  <label for="exampleFormControlFile1">Upload Proposal</label>
-                  <input type="file" class="form-control-file" id="exampleFormControlFile1" name="proposal">
-                  <small class="form-text text-danger">Harus berformat PDF</small>
-               </div>
+                        </div>
+                        <div class="form-group">
+                           <label for="nama_kegiatan">Nama Kegiatan</label>
+                           <input type="text" class="form-control" id="nama_kegiatan" name="nama_kegiatan">
+                        </div>
+                        <div class="form-group">
+                           <label for="datepicker">Tanggal</label>
+                           <input type="text" class="form-control" id="datepicker" name="datepicker">
+                        </div>
+                        <div class="form-group">
+                           <label for="kategori">Pilih Kategori</label>
+                           <select class="form-control" id="kategori" name="kategori">
+                              <?php foreach($x['1'] as $fk): ?>
+                              <option value="<?= $fk['ID_FAKULTAS']?>"><?= $fk['NAMA_FAKULTAS']?></option>
+                              <?php endforeach; ?>
+                           </select>
+                        </div>
 
-         </div>
-         <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
-            <button type="submit" class="btn btn-primary">Tambah Data</button>
-         </div>
-         </form>
+                        <div class="form-group">
+                           <label for="exampleFormControlFile1">Upload Proposal</label>
+                           <input type="file" class="form-control-file" id="exampleFormControlFile1" name="proposal">
+                           <small class="form-text text-danger">Harus berformat PDF</small>
+                        </div>
+
+                  </div>
+                  <div class="modal-footer">
+                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                     <button type="submit" class="btn btn-primary">Tambah Data</button>
+                  </div>
+                  </form>
+
+         
 
       </div>
    </div>

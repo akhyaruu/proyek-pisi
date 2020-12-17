@@ -5,8 +5,10 @@ class Admin extends CI_Controller {
 
    function __construct(){
 		parent::__construct();
-		if($this->session->userdata('STATUS') !== "login" && $this->session->userdata('LEVEL') !== "1"){
+		if($this->session->userdata('STATUS') !== TRUE && $this->session->userdata('LEVEL') !== "1"){
 			redirect('login');
+		}else {
+			$this->session->unset_userdata('STATUS');
 		}
 	}
    
