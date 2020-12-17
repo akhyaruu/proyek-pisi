@@ -14,7 +14,8 @@
       </div>
    </div>
 
-   <!-- Content Row -->
+   <a href="#" class="d-none mb-3 mt-1 d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
+         class="fas fa-download fa-sm text-white-50"></i> Buat laporan</a>
    <!-- Content Row -->
    <div class="row mb-5">
       <div class="col-md-12">
@@ -29,6 +30,7 @@
                            <th scope="col">UKM</th>
                            <th scope="col">Kegiatan</th>
                            <th scope="col">Tgl Acara</th>
+                           <th scope="col">Total Revisi</th>
                            <th scope="col">Status</th>
                            <th scope="col">Aksi</th>
                         </tr>
@@ -38,9 +40,10 @@
                            <td>1</td>
                            <td>Ilham</td>
                            <td>UQPI</td>
-                           <td>Akhir Tahun</td>
+                           <td>Seminar IFEST</td>
                            <td>12-07-2015</td>
-                           <td class="text-success">Selesai</td>
+                           <td>3</td>
+                           <td class="text-success"><i class="fas fa-check"></i> Selesai</td>
                            <td>
                               <button class="btn btn-sm btn-primary">Download Pengajuan</button>
                               <button class="btn btn-sm btn-primary">Download SPJ</button>

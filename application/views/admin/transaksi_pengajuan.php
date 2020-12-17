@@ -15,7 +15,6 @@
       <div class="col-md-6">
          <p class="mr-2 d-block d-md-inline">Berdasarkan tgl</p>
          <input type="date">
-         <!-- <span>-</span> -->
          <input type="date">
       </div>
    </div>
