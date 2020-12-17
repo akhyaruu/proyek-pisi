@@ -32,7 +32,7 @@
           </div>
           <div class="modal-body">Pilih "Logout" dibawah apabila ingin mengakhiri session saat ini</div>
           <div class="modal-footer">
-             <a class="btn btn-primary" href="<?= base_url('login')?>">Logout</a>
+             <a class="btn btn-primary" href="<?= base_url('login/logout')?>">Logout</a>
           </div>
        </div>
     </div>

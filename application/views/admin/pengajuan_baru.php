@@ -21,7 +21,15 @@
       </div>
    </div>
 
-   <!-- Content Row -->
+   <?php if ($this->session->flashdata('pesan')) : ?>
+   <div class="alert alert-success alert-dismissible fade show" role="alert">
+      <?= $this->session->flashdata('pesan')?>
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+         <span aria-hidden="true">&times;</span>
+      </button>
+   </div>
+   <?php endif; ?>
+
    <!-- Content Row -->
    <div class="row mb-5">
       <div class="col-md-12">
@@ -40,40 +48,43 @@
                            <th scope="col">Aksi</th>
                         </tr>
                      </thead>
+
                      <tbody id="tBodyTransaksi">
+                        <?php $no = 1?>
+                        <?php foreach ($pengajuan as $pj): ?>
+
+                        <?php if ($pj->STATUS_PENGAJUAN !== 'Disetujui') : ?>
                         <tr>
-                           <td>1</td>
-                           <td>Ilham</td>
-                           <td>UQPI</td>
-                           <td>Tahun Baru</td>
-                           <td>12-07-2000</td>
+                           <td><?= $no++?></td>
+                           <td><?= $pj->NAMA_USER?></td>
+                           <td><?= $pj->NAMA_UKM?></td>
+                           <td><?= $pj->NAMA_UKM?></td>
+                           <td><?= date('d F Y', strtotime($pj->TGL_ACARA))?></td>
+
+                           <?php if ($pj->STATUS_PENGAJUAN == 'Antri') : ?>
                            <td><i class="fas fa-hourglass-start"></i> Antri</td>
+                           <?php elseif ($pj->STATUS_PENGAJUAN == 'Revisi') : ?>
+                           <td class="text-warning"><i class="fas fa-undo"></i> Revisi</td>
+                           <?php else : ?>
+                           <td class="text-success"><i class="far fa-file-pdf"></i></i> Revisi Masuk</td>
+                           <?php endif; ?>
+
                            <td>
-                              <button class="btn btn-sm btn-primary">Download Pengajuan</button>
-                              <a href="" class="btn btn-sm btn-success"
+                              <a href="<?= site_url('admin/downloadPengajuan/'.$pj->ID_PENGAJUAN)?>"
+                                 class="btn btn-sm btn-primary">Download Pengajuan</a>
+                              <a href="<?= site_url('admin/setujuiPengajuan/'.$pj->ID_PENGAJUAN)?>"
+                                 class="btn btn-sm btn-success"
                                  onclick="return confirm('apakah kamu yakin mensetujui pengajuan ini?')">Disetujui</a>
                               <button class="btn btn-sm btn-warning" data-toggle="modal"
                                  data-target="#modalRevisi">Revisi</button>
-                              <button class="btn btn-sm btn-danger float-right"
+                              <button class="btn btn-sm btn-danger"
                                  onclick="return confirm('apakah kamu yakin menghapus pengajuan ini?')">Hapus</button>
                            </td>
                         </tr>
-                        <tr>
-                           <td>1</td>
-                           <td>Ilham</td>
-                           <td>UQPI</td>
-                           <td>Tahun Baru</td>
-                           <td>12-07-2000</td>
-                           <td class="text-warning"><i class="fas fa-undo"></i> Revisi</td>
-                           <td>
-                              <button class="btn btn-sm btn-primary">Download Pengajuan</button>
-                              <button class="btn btn-sm btn-success">Disetujui</button>
-                              <button class="btn btn-sm btn-warning">Revisi</button>
-                              <button class="btn btn-sm btn-danger float-right">Hapus</button>
-                           </td>
-                        </tr>
-
+                        <?php endif; ?>
+                        <?php endforeach; ?>
                      </tbody>
+
                   </table>
                </div>
 

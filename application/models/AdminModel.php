@@ -2,7 +2,8 @@
 
 class AdminModel extends CI_Model {
    
-   private $_table = "pengajuan";
+   private $_pengajuan = "pengajuan";
+   private $_tpengajuan = "transaksipengajuan";
 
    public $pengajuan;
    public $id_user;
@@ -10,15 +11,26 @@ class AdminModel extends CI_Model {
    public $nama_ukm;
    public $nama_acara;
 
-    public function getAll()
-    {
-        return $this->db->get($this->_table)->result();
-    }
+   public function getAllPengajuan()
+   {
+      return $this->db->select('*')->from($this->_pengajuan)->join('user', 'user.id_user = pengajuan.id_user')->get()->result();
+   }
 
-    public function getById($id)
-    {
-        return $this->db->get_where($this->_table, ["pengajuan" => $id])->row();
-    }
+   public function download($id)
+   {
+      return $this->db->get_where($this->_pengajuan, ["ID_PENGAJUAN" => $id])->row()->URL_PENGAJUAN;
+   }
 
+   public function setAgreePengajuan($id)
+   {
+      $this->db->where('ID_PENGAJUAN', $id)->update($this->_pengajuan, array('STATUS_PENGAJUAN' => 'Disetujui'));
+      $data = array(
+         'ID_PENGAJUAN' => $id,
+         'STATUS_TPENGAJUAN' => 'Sedang Diproses',
+         'JUMLAH_REV' => 0
+      );
+      $this->db->insert($this->_tpengajuan, $data);
+      return 'Pengajuan Berhasil Disetujui';
+   }
 
 }

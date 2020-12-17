@@ -60,7 +60,7 @@
                <span>Transaksi Pengajuan</span></a>
          </li>
          <li class="nav-item">
-            <a class="nav-link" href="<?= base_url('admin/historitransaksi')?>">
+            <a class="nav-link" href="<?= base_url('admin/historipengajuan')?>">
                <i class="fas fa-history"></i>
                <span>Histori Transaksi</span></a>
          </li>
