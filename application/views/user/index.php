@@ -45,8 +45,8 @@
                   class="badge badge-warning tombol-hapus ml-1 tampilModalUbah" data-toggle="modal"
                   data-target="#formModal" data-id="<?= $pj['ID_PENGAJUAN']; ?>">ubah</a>
                <?php if ($pj['STATUS_PENGAJUAN'] == 'revisi') : ?>
-               <a href="" class="badge badge-success ml-1" data-toggle="modal"
-                  data-target="#formModalRevisi">revisi</a>
+               <a href="<?=base_url(); ?>user/revisi/<?= $pj['ID_PENGAJUAN']; ?>" class="badge badge-success ml-1 tampilModalRevisi" data-toggle="modal"
+                  data-target="#formModalRevisi" data-id="<?= $pj['ID_PENGAJUAN']; ?>">revisi</a>
                <?php endif; ?>
 
                <a href="" class="badge badge-primary ml-1">spj</a>
@@ -73,8 +73,8 @@
                   </div>
                   <div class="modal-body">
                      <form action="<?php echo base_url(); ?>user/tambah" method="post" enctype="multipart/form-data">
-                        <input type="hidden" name='id' id='id' value="1">
-                        <div class="form-group">
+                     <input type="hidden" name='id' id='id' value="1">
+                        <div class="form-group ">
                            <label for="nama_ukm">Nama Ukm</label>
                            <input type="text" class="form-control" id="nama_ukm" name="nama_ukm">
 
@@ -109,9 +109,39 @@
                   </div>
                   </form>
 
-         
-
+            </div>
+         </div>
       </div>
-   </div>
-</div>
-</div>
+      </div>
+      <div class="modal fade modalRevisi" id="formModalRevisi" tabindex="-1" aria-labelledby="judulModal" aria-hidden="true">
+            <div class="modal-dialog">
+               <div class="modal-content">
+                  <div class="modal-header">
+                     <h5 class="modal-title" id="formModalLabelRevisi">Revisi Proposal</h5>
+                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                     </button>
+                  </div>
+                  <div class="modal-body">
+                     <form action="<?php echo base_url(); ?>user/tambah" method="post" enctype="multipart/form-data">
+                     <input type="hidden" name='id' id='id' value="1">
+
+                        <div class="form-group">
+                        <input type="hidden" name='jml_rev' id='jml_rev'>
+                           <label for="exampleFormControlFile1">Upload Proposal</label>
+                           <input type="file" class="form-control-file" id="exampleFormControlFile1" name="proposal">
+                           <small class="form-text text-danger">Harus berformat PDF</small>
+                        </div>
+
+                  </div>
+                  <div class="modal-footer">
+                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                     <button type="submit" class="btn btn-primary">Tambah Data</button>
+                  </div>
+                  </form>
+
+            </div>
+         </div>
+      </div>
+      </div>
+      

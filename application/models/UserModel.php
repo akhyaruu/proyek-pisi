@@ -23,6 +23,8 @@ class UserModel extends CI_Model {
          "NAMA_UKM" => $this->input->post('nama_ukm', true),
          "NAMA_ACARA" => $this->input->post('nama_kegiatan', true),
          "TGL_PENGAJUAN" => date("y-m-d"),
+         "TGL_REV_PENGAJUAN" => date("y-m-d"),
+         "JUMLAH_REV" => 0,
          "TGL_ACARA" => $this->input->post('datepicker', true),
          "STATUS_PENGAJUAN" => "Antri",
          "URL_PENGAJUAN" => $namaBerkas
@@ -42,6 +44,18 @@ class UserModel extends CI_Model {
             "NAMA_ACARA" => $this->input->post('nama_kegiatan', true),
             "TGL_ACARA" => $this->input->post('datepicker', true),
             "URL_PENGAJUAN" => $namaBerkas
+            
+        ];
+
+        $this->db->where('ID_PENGAJUAN', $this->input->post('id'));
+        $this->db->update('pengajuan', $data);
+    }
+    public function ubahDataRevisi($namaBerkas)
+    {
+        $data = [
+            
+            "URL_PENGAJUAN" => $namaBerkas,
+            "TGL_REV_PENGAJUAN" => "2020-12-19"
             
         ];
 
