@@ -4,8 +4,8 @@ class UserModel extends CI_Model {
    public function getData($id,$limit, $start) 
    {
       
-    $y = $this->db->select('*')->from('pengajuan')->join(' transaksipengajuan ', ' transaksipengajuan.ID_PENGAJUAN = pengajuan.ID_PENGAJUAN ' )->where(' pengajuan.ID_USER ',$id)->limit($limit, $start)->get()->result_array();
-      $x = array($y, $this->db->get('fakultas')->result_array()) ;
+    //$y = $this->db->select('*')->from('pengajuan')->join(' transaksipengajuan ', ' transaksipengajuan.ID_PENGAJUAN = pengajuan.ID_PENGAJUAN ' )->where(' pengajuan.ID_USER ',$id)->limit($limit, $start)->get()->result_array();
+      $x = array($this->db->get_where('pengajuan', ['ID_USER' => $id],$limit,$start)->result_array(), $this->db->get('fakultas')->result_array()) ;
       
       return $x;
    }

@@ -58,7 +58,7 @@ class User extends CI_Controller {
 		$data['start'] = $this->uri->segment(3);
 		
 		$data['x'] = $this->UserModel->getData($id,$config['per_page'],$data['start']);
-		var_dump($data['x']); die;
+		
 		//$data['fakultas'] = $this->UserModel->getData();
 	
 		$this->load->view('themes/user/header');
