@@ -113,7 +113,7 @@
          </div>
       </div>
       </div>
-      <div class="modal fade modalRevisi" id="formModalRevisi" tabindex="-1" aria-labelledby="judulModal" aria-hidden="true">
+      <div class="modal fade " id="formModalRevisi" tabindex="-1" aria-labelledby="judulModal" aria-hidden="true">
             <div class="modal-dialog">
                <div class="modal-content">
                   <div class="modal-header">
@@ -124,12 +124,11 @@
                   </div>
                   <div class="modal-body">
                      <form action="<?php echo base_url(); ?>user/tambah" method="post" enctype="multipart/form-data">
-                     <input type="hidden" name='id' id='id' value="1">
+                     <input type="hidden" name='id_rev' id='id_rev' value="1">
 
                         <div class="form-group">
-                        <input type="hidden" name='jml_rev' id='jml_rev'>
                            <label for="exampleFormControlFile1">Upload Proposal</label>
-                           <input type="file" class="form-control-file" id="exampleFormControlFile1" name="proposal">
+                           <input type="file" class="form-control-file" id="exampleFormControlFile1" name="proposal_revisi">
                            <small class="form-text text-danger">Harus berformat PDF</small>
                         </div>
 

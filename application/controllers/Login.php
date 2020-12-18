@@ -56,13 +56,15 @@ class Login extends CI_Controller
 
     public function logout()
     {
-        if($this->session->userdata('STATUS') == TRUE) {
+        $this->session->sess_destroy();
+        redirect('login');
+        /*if($this->session->userdata('STATUS') == TRUE) {
             $data = array('ID_USER','NAMA_USER','NIP','NIM','LEVEL','STATUS');
             $this->session->unset_userdata($data);
             redirect('login');
         } else {
             $this->session->set_flashdata('pesan', '<div class="alert alert-danger" role="alert">Login terlebih dahulu</div>');
             redirect('login');
-        }
+        }*/
     }
 }

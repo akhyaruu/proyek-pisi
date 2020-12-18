@@ -6,6 +6,7 @@ class User extends CI_Controller {
 	function __construct(){
 		parent::__construct();
 		if($this->session->userdata('STATUS') !== TRUE && $this->session->userdata('LEVEL') !== "2"){
+			$this->session->sess_destroy();
 			redirect('login');
 		}else {
 			$this->session->unset_userdata('STATUS');
@@ -22,6 +23,7 @@ class User extends CI_Controller {
 		$id = $this->session->userdata('ID_USER');
 		$config['base_url'] = 'http://localhost/proyekpisi/user/index';
 		$config['total_rows'] = $this->UserModel->getCountData($id);
+		
 		$config['per_page'] = 5;
 
 		$config['full_tag_open'] = '<nav><ul class="pagination">';
@@ -54,7 +56,9 @@ class User extends CI_Controller {
 		$this->pagination->initialize($config);
 		
 		$data['start'] = $this->uri->segment(3);
+		
 		$data['x'] = $this->UserModel->getData($id,$config['per_page'],$data['start']);
+		var_dump($data['x']); die;
 		//$data['fakultas'] = $this->UserModel->getData();
 	
 		$this->load->view('themes/user/header');
@@ -128,10 +132,10 @@ if ($this->form_validation->run() == false) {
 }
    }
 
-public function Revisi()
+public function revisi()
    {
 
-	if(!$this->upload->do_upload('proposal')) {
+	if(!$this->upload->do_upload('proposal_revisi')) {
 		$this->session->set_flashdata('pesan', '<div class="alert alert-danger" role="alert">anda belum melampirkan proposal</div>');
 		redirect('user');	
 	} else {

@@ -3,7 +3,9 @@ class UserModel extends CI_Model {
    
    public function getData($id,$limit, $start) 
    {
-      $x = array($this->db->get_where('pengajuan', ['ID_USER' => $id],$limit, $start)->result_array(), $this->db->get('fakultas')->result_array()) ;
+      
+    $y = $this->db->select('*')->from('pengajuan')->join(' transaksipengajuan ', ' transaksipengajuan.ID_PENGAJUAN = pengajuan.ID_PENGAJUAN ' )->where(' pengajuan.ID_USER ',$id)->limit($limit, $start)->get()->result_array();
+      $x = array($y, $this->db->get('fakultas')->result_array()) ;
       
       return $x;
    }
@@ -53,13 +55,14 @@ class UserModel extends CI_Model {
     public function ubahDataRevisi($namaBerkas)
     {
         $data = [
-            
+            "TGL_REV_PENGAJUAN" => date("y-m-d"),
             "URL_PENGAJUAN" => $namaBerkas,
-            "TGL_REV_PENGAJUAN" => "2020-12-19"
+            "STATUS_PENGAJUAN" => "Menyerahkan Revisi"
+            
             
         ];
 
-        $this->db->where('ID_PENGAJUAN', $this->input->post('id'));
+        $this->db->where('ID_PENGAJUAN', $this->input->post('id_rev'));
         $this->db->update('pengajuan', $data);
     }
 

@@ -7,7 +7,10 @@ class Admin extends CI_Controller {
       parent::__construct();
       $this->load->helper('download');
 		if($this->session->userdata('STATUS') !== TRUE && $this->session->userdata('LEVEL') !== "1"){
+         $this->session->sess_destroy();
 			redirect('login');
+		}else {
+			$this->session->unset_userdata('STATUS');
 		}
 	}
 

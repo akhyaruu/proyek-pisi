@@ -32,11 +32,11 @@ $(function() {
     });
     $('.tampilModalRevisi').on('click', function() {
         
-        $('#formModalLabel').html('Ubah Data Pengajuan');
-        $('.modal-footer button[type=submit]').html('Ubah Data');
+        $('#formModalLabelRevisi').html('coba');
+        $('.modal-footer button[type=submit]').html('Ubah Data revisi');
         $('.modal-body form').attr('action', 'http://localhost/proyekpisi/user/revisi');
 
-        const id = $(this).data('id');
+        const id = $(this).data('rev');
         
         $.ajax({
             url: 'http://localhost/proyekpisi/user/getubah',
@@ -45,8 +45,7 @@ $(function() {
             dataType: 'json',
             success: function(data) {
                 console.log(data);
-                $('#jml_rev').val(data.JUMLAH_REV);
-                $('#id').val(data.ID_PENGAJUAN);
+                $('#id_rev').val(data.ID_PENGAJUAN);
             }
         });
         
