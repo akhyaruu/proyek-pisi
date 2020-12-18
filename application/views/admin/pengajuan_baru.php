@@ -141,7 +141,10 @@
 
 
 <script>
-$("#bRevisi").click(function() {
-   $('#idRevisi').val($('#bRevisi').val());
+$(document).ready(function() {
+   $("#bRevisi").click(function() {
+      $('#idRevisi').val($('#bRevisi').val());
+   });
+
 });
 </script>

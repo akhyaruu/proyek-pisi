@@ -57,6 +57,8 @@
                      <tbody id="tBodyTransaksi">
                         <?php $no = 1?>
                         <?php foreach ($transaksi as $tr): ?>
+
+                        <?php if ($tr->STATUS_TPENGAJUAN !== 'Selesai') : ?>
                         <tr>
                            <td><?= $no++?></td>
                            <td><?= $tr->NAMA_UKM?></td>
@@ -71,7 +73,7 @@
                            <?php if ($tr->STATUS_TPENGAJUAN === 'Sedang Berjalan') : ?>
                            <td class="text-secondary"><i class="fas fa-hourglass-half"></i> Sedang Berjalan</td>
                            <?php elseif ($tr->STATUS_TPENGAJUAN == 'Revisi SPJ') : ?>
-                           <td class="text-warning"><i class="fas fa-undo"></i> Revisi SPJ</td>
+                           <td class="text-warning "><i class="fas fa-undo"></i> Revisi SPJ</td>
                            <?php else : ?>
                            <td class="text-success"><i class="far fa-file-pdf"></i> Menyerahkan SPJ</td>
                            <?php endif; ?>
@@ -82,59 +84,23 @@
                                  class="btn btn-sm btn-primary">Download SPJ</a>
                               <button id="bRevisi" class="btn btn-sm btn-warning" data-toggle="modal"
                                  data-target="#modalRevisi" value="<?= $tr->ID_TPENGAJUAN?>">Revisi</button>
-                              <button class="btn btn-sm btn-success">Selesai</button>
+                              <a href="<?= site_url('admin/setujuiSpj/'.$tr->ID_TPENGAJUAN)?>"
+                                 onclick="return confirm('apakah kamu yakin mensetujui spj kegiatan <?= $tr->NAMA_ACARA?> ?')"
+                                 class="btn btn-sm btn-success">Selesai</a>
                               <?php else : ?>
-                              <span class="text-info">Menunggu SPJ</span>
+                              <span class="text-info font-weight-bold">Menunggu SPJ</span>
                               <?php endif; ?>
                            </td>
                         </tr>
+                        <?php endif; ?>
+
                         <?php endforeach; ?>
-                        <!-- <tr>
-                           <td>1</td>
-                           <td>UQPI</td>
-                           <td>Kegiatan Baru</td>
-                           <td>20-07-2000</td>
-                           <td>Belum Revisi</td>
-                           <td class="text-secondary"><i class="fas fa-hourglass-half"></i> Sedang Berjalan</td>
-                           <td>
-                              <button class="btn btn-sm btn-primary" disabled>Download SPJ</button>
-                              <button class="btn btn-sm btn-warning" disabled>Revisi</button>
-                              <button class="btn btn-sm btn-success" disabled>Selesai</button>
-                           </td>
-                        </tr>
-                        <tr>
-                           <td>2</td>
-                           <td>UQPI</td>
-                           <td>Kegiatan Baru</td>
-                           <td>20-07-2000</td>
-                           <td>Belum Revisi</td>
-                           <td class="text-success"><i class="far fa-file-pdf"></i> Menyerahkan SPJ</td>
-                           <td>
-                              <button class="btn btn-sm btn-primary">Download SPJ</button>
-                              <button class="btn btn-sm btn-warning" data-toggle="modal"
-                                 data-target="#modalRevisi">Revisi</button>
-                              <button class="btn btn-sm btn-success">Selesai</button>
-                           </td>
-                        </tr>
-                        <tr>
-                           <td>2</td>
-                           <td>UQPI</td>
-                           <td>Kegiatan Baru</td>
-                           <td>20-07-2000</td>
-                           <td>31-07-2000</td>
-                           <td class="text-warning"><i class="fas fa-undo"></i> Revisi SPJ</td>
-                           <td>
-                              <button class="btn btn-sm btn-primary" disabled>Download SPJ</button>
-                              <button class="btn btn-sm btn-warning">Revisi</button>
-                              <button class="btn btn-sm btn-success">Selesai</button>
-                           </td>
-                        </tr> -->
 
                      </tbody>
                   </table>
                </div>
 
-               <nav aria-label="Page navigation example">
+               <!-- <nav aria-label="Page navigation example">
                   <ul class="pagination">
                      <li class="page-item">
                         <a class="page-link" href="#" aria-label="Previous">
@@ -150,7 +116,7 @@
                         </a>
                      </li>
                   </ul>
-               </nav>
+               </nav> -->
 
             </div>
          </div>
@@ -191,7 +157,10 @@
 <!-- End of Main Content -->
 
 <script>
-$("#bRevisi").click(function() {
-   $('#idRevisi').val($('#bRevisi').val());
+$(document).ready(function() {
+   $("#bRevisi").click(function() {
+      $('#idRevisi').val($('#bRevisi').val());
+   });
+
 });
 </script>
