@@ -28,6 +28,13 @@
          <span aria-hidden="true">&times;</span>
       </button>
    </div>
+   <?php elseif ($this->session->flashdata('error')) :?>
+   <div class="alert alert-warning alert-dismissible fade show" role="alert">
+      <?= $this->session->flashdata('error')?>
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+         <span aria-hidden="true">&times;</span>
+      </button>
+   </div>
    <?php endif; ?>
 
    <!-- Content Row -->
@@ -58,7 +65,7 @@
                            <td><?= $no++?></td>
                            <td><?= $pj->NAMA_USER?></td>
                            <td><?= $pj->NAMA_UKM?></td>
-                           <td><?= $pj->NAMA_UKM?></td>
+                           <td><?= $pj->NAMA_ACARA?></td>
                            <td><?= date('d F Y', strtotime($pj->TGL_ACARA))?></td>
 
                            <?php if ($pj->STATUS_PENGAJUAN == 'Antri') : ?>
@@ -70,15 +77,20 @@
                            <?php endif; ?>
 
                            <td>
+                              <?php if ($pj->STATUS_PENGAJUAN !== 'Revisi') : ?>
                               <a href="<?= site_url('admin/downloadPengajuan/'.$pj->ID_PENGAJUAN)?>"
                                  class="btn btn-sm btn-primary">Download Pengajuan</a>
                               <a href="<?= site_url('admin/setujuiPengajuan/'.$pj->ID_PENGAJUAN)?>"
                                  class="btn btn-sm btn-success"
-                                 onclick="return confirm('apakah kamu yakin mensetujui pengajuan ini?')">Disetujui</a>
-                              <button class="btn btn-sm btn-warning" data-toggle="modal"
-                                 data-target="#modalRevisi">Revisi</button>
-                              <button class="btn btn-sm btn-danger"
-                                 onclick="return confirm('apakah kamu yakin menghapus pengajuan ini?')">Hapus</button>
+                                 onclick="return confirm('apakah kamu yakin mensetujui pengajuan <?= $pj->NAMA_USER?> ?')">Disetujui</a>
+                              <?php endif; ?>
+                              <button id="bRevisi" class="btn btn-sm btn-warning" data-toggle="modal"
+                                 data-target="#modalRevisi" value="<?= $pj->ID_PENGAJUAN?>">Revisi</button>
+                              <?php if ($pj->STATUS_PENGAJUAN !== 'Revisi') : ?>
+                              <a href="<?= site_url('admin/hapusPengajuan/'.$pj->ID_PENGAJUAN)?>"
+                                 class="btn btn-sm btn-danger"
+                                 onclick="return confirm('apakah kamu yakin menghapus pengajuan <?= $pj->NAMA_USER?> ?')">Hapus</a>
+                              <?php endif; ?>
                            </td>
                         </tr>
                         <?php endif; ?>
@@ -103,12 +115,18 @@
                   <span aria-hidden="true">&times;</span>
                </button>
             </div>
-            <div class="modal-body">
-               ...
-            </div>
-            <div class="modal-footer">
-               <button type="button" class="btn btn-primary">Submit</button>
-            </div>
+            <form action="<?= site_url('admin/revisiPengajuan')?>" method="post" enctype="multipart/form-data">
+               <div class="modal-body">
+                  Masukan file revisi pengajuan
+                  <div>
+                     <input type="file" class="mt-3" name="filerevisi">
+                     <input id="idRevisi" type="text" name="idpengajuan" value="" hidden>
+                  </div>
+               </div>
+               <div class="modal-footer">
+                  <button type="submit" class="btn btn-primary">Submit</button>
+               </div>
+            </form>
          </div>
       </div>
    </div>
@@ -121,8 +139,9 @@
 </div>
 <!-- End of Main Content -->
 
+
 <script>
-if (document.readyState === 'complete') {
-   console.log('ya');
-}
+$("#bRevisi").click(function() {
+   $('#idRevisi').val($('#bRevisi').val());
+});
 </script>
