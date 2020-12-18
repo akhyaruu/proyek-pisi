@@ -44,8 +44,8 @@
                <a href="<?=base_url(); ?>user/ubah/<?= $pj['ID_PENGAJUAN']; ?>" n
                   class="badge badge-warning tombol-hapus ml-1 tampilModalUbah" data-toggle="modal"
                   data-target="#formModal" data-id="<?= $pj['ID_PENGAJUAN']; ?>">ubah</a>
-               <?php if ($pj['STATUS_PENGAJUAN'] == 'revisi') : ?>
-               <a href="<?=base_url(); ?>user/revisi/<?= $pj['ID_PENGAJUAN']; ?>" class="badge badge-success ml-1 tampilModalRevisi" data-toggle="modal"
+               <?php if ($pj['STATUS_PENGAJUAN'] == 'Revisi') : ?>
+               <a href="<?=base_url(); ?>user/revisi/<?= $pj['ID_PENGAJUAN']; ?>"  class="badge badge-success ml-1 tampilModalRevisi" data-toggle="modal"
                   data-target="#formModalRevisi" data-id="<?= $pj['ID_PENGAJUAN']; ?>">revisi</a>
                <?php endif; ?>
 
@@ -113,7 +113,7 @@
          </div>
       </div>
       </div>
-      <div class="modal fade " id="formModalRevisi" tabindex="-1" aria-labelledby="judulModal" aria-hidden="true">
+      <div class="modal fade formModalRevisi" id="formModalRevisi" tabindex="-1" aria-labelledby="judulModal" aria-hidden="true">
             <div class="modal-dialog">
                <div class="modal-content">
                   <div class="modal-header">
@@ -123,12 +123,12 @@
                      </button>
                   </div>
                   <div class="modal-body">
-                     <form action="<?php echo base_url(); ?>user/tambah" method="post" enctype="multipart/form-data">
-                     <input type="hidden" name='id_rev' id='id_rev' value="1">
+                     <form action="<?php echo base_url(); ?>user/revisi" method="post" enctype="multipart/form-data">
+                     <input type="hidden" name='id_rev' id='id_rev' value="">
 
                         <div class="form-group">
                            <label for="exampleFormControlFile1">Upload Proposal</label>
-                           <input type="file" class="form-control-file" id="exampleFormControlFile1" name="proposal_revisi">
+                           <input type="file" class="form-control-file" id="exampleFormControlFile1" name="proposal">
                            <small class="form-text text-danger">Harus berformat PDF</small>
                         </div>
 
@@ -143,4 +143,12 @@
          </div>
       </div>
       </div>
+      <script>
+$(document).ready(function() {
+   $("#btnRevisi").click(function() {
+      $('#id_rev').val($('#btnRevisi').val());
+   });
+
+});
+</script>
       

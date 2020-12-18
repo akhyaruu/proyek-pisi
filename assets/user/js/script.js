@@ -36,7 +36,7 @@ $(function() {
         $('.modal-footer button[type=submit]').html('Ubah Data revisi');
         $('.modal-body form').attr('action', 'http://localhost/proyekpisi/user/revisi');
 
-        const id = $(this).data('rev');
+        const id = $(this).data('id');
         
         $.ajax({
             url: 'http://localhost/proyekpisi/user/getubah',
@@ -54,4 +54,7 @@ $(function() {
 
 
 
+});
+$(function() {
+    
 });

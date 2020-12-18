@@ -54,15 +54,18 @@ class UserModel extends CI_Model {
     }
     public function ubahDataRevisi($namaBerkas)
     {
+        $id = $this->input->post('id_rev');
+        
         $data = [
-            "TGL_REV_PENGAJUAN" => date("y-m-d"),
+            
             "URL_PENGAJUAN" => $namaBerkas,
+            "TGL_REV_PENGAJUAN" => date("y-m-d"),
             "STATUS_PENGAJUAN" => "Menyerahkan Revisi"
             
             
         ];
 
-        $this->db->where('ID_PENGAJUAN', $this->input->post('id_rev'));
+        $this->db->where('ID_PENGAJUAN', $id);
         $this->db->update('pengajuan', $data);
     }
 

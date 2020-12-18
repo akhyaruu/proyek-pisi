@@ -134,8 +134,8 @@ if ($this->form_validation->run() == false) {
 
 public function revisi()
    {
-
-	if(!$this->upload->do_upload('proposal_revisi')) {
+	
+	if(!$this->upload->do_upload('proposal')) {
 		$this->session->set_flashdata('pesan', '<div class="alert alert-danger" role="alert">anda belum melampirkan proposal</div>');
 		redirect('user');	
 	} else {
