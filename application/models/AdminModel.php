@@ -13,7 +13,10 @@ class AdminModel extends CI_Model {
 
    public function getAllPengajuan()
    {
-      return $this->db->select('*')->from($this->_pengajuan)->join('user', 'user.id_user = pengajuan.id_user')->get()->result();
+      return $this->db->select('*')->from($this->_pengajuan)
+         ->join('user', 'user.id_user = pengajuan.id_user')
+         ->order_by('pengajuan.id_pengajuan', 'DESC')
+         ->get()->result();
    }
 
    public function download($id)
@@ -30,7 +33,18 @@ class AdminModel extends CI_Model {
          'JUMLAH_REV' => 0
       );
       $this->db->insert($this->_tpengajuan, $data);
-      return 'Pengajuan Berhasil Disetujui';
+      return 'Pengajuan berhasil disetujui';
+   }
+
+   public function setRevisiPengajuan($namaBerkas)
+   {
+      $id = $this->input->post('idpengajuan');
+      $data = array(
+         'STATUS_PENGAJUAN' => 'Revisi',
+         'URL_PENGAJUAN' => $namaBerkas
+      ); 
+      $this->db->where('ID_PENGAJUAN', $id)->update($this->_pengajuan, $data);
+      return 'Revisi berhasil dikirim';
    }
 
 }

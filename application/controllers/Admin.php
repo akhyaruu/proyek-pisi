@@ -44,6 +44,26 @@ class Admin extends CI_Controller {
       redirect('admin/pengajuanbaru');
    }
    
+   public function revisiPengajuan()
+   {
+      $config['upload_path']          = './uploads/revisi/';
+		$config['allowed_types']        = 'pdf';
+      $config['max_size']             = 2500;
+      $this->upload->initialize($config);
+
+      if(!$this->upload->do_upload('filerevisi')) {
+			$this->session->set_flashdata('error', 'Revisi gagal dikirim');
+			redirect('admin/pengajuanbaru');	
+		} else {
+			$namaBerkas = $this->upload->data("file_name");
+			$hasil = $this->AdminModel->setRevisiPengajuan($namaBerkas);
+         $this->session->set_flashdata('pesan', $hasil);
+         redirect('admin/pengajuanbaru');
+      }
+      
+      
+   }
+
    // ------------------------------------ transaksi pengajuan
 
    public function transaksipengajuan() 
