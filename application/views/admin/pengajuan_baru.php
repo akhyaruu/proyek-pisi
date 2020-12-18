@@ -29,7 +29,7 @@
       </button>
    </div>
    <?php elseif ($this->session->flashdata('error')) :?>
-   <div class="alert alert-success alert-dismissible fade show" role="alert">
+   <div class="alert alert-warning alert-dismissible fade show" role="alert">
       <?= $this->session->flashdata('error')?>
       <button type="button" class="close" data-dismiss="alert" aria-label="Close">
          <span aria-hidden="true">&times;</span>
@@ -77,19 +77,20 @@
                            <?php endif; ?>
 
                            <td>
+                              <?php if ($pj->STATUS_PENGAJUAN !== 'Revisi') : ?>
                               <a href="<?= site_url('admin/downloadPengajuan/'.$pj->ID_PENGAJUAN)?>"
                                  class="btn btn-sm btn-primary">Download Pengajuan</a>
-
-                              <?php if ($pj->STATUS_PENGAJUAN !== 'Revisi') : ?>
                               <a href="<?= site_url('admin/setujuiPengajuan/'.$pj->ID_PENGAJUAN)?>"
                                  class="btn btn-sm btn-success"
-                                 onclick="return confirm('apakah kamu yakin mensetujui pengajuan ini?')">Disetujui</a>
+                                 onclick="return confirm('apakah kamu yakin mensetujui pengajuan <?= $pj->NAMA_USER?> ?')">Disetujui</a>
                               <?php endif; ?>
-
                               <button id="bRevisi" class="btn btn-sm btn-warning" data-toggle="modal"
                                  data-target="#modalRevisi" value="<?= $pj->ID_PENGAJUAN?>">Revisi</button>
-                              <button class="btn btn-sm btn-danger"
-                                 onclick="return confirm('apakah kamu yakin menghapus pengajuan ini?')">Hapus</button>
+                              <?php if ($pj->STATUS_PENGAJUAN !== 'Revisi') : ?>
+                              <a href="<?= site_url('admin/hapusPengajuan/'.$pj->ID_PENGAJUAN)?>"
+                                 class="btn btn-sm btn-danger"
+                                 onclick="return confirm('apakah kamu yakin menghapus pengajuan <?= $pj->NAMA_USER?> ?')">Hapus</a>
+                              <?php endif; ?>
                            </td>
                         </tr>
                         <?php endif; ?>
@@ -116,7 +117,7 @@
             </div>
             <form action="<?= site_url('admin/revisiPengajuan')?>" method="post" enctype="multipart/form-data">
                <div class="modal-body">
-                  Masukan file revisi
+                  Masukan file revisi pengajuan
                   <div>
                      <input type="file" class="mt-3" name="filerevisi">
                      <input id="idRevisi" type="text" name="idpengajuan" value="" hidden>
@@ -142,6 +143,5 @@
 <script>
 $("#bRevisi").click(function() {
    $('#idRevisi').val($('#bRevisi').val());
-   // console.log(value);
 });
 </script>
