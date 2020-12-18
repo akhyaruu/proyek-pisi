@@ -36,20 +36,24 @@
                         </tr>
                      </thead>
                      <tbody id="tBodyTransaksi">
+                        <?php $no = 1?>
+                        <?php foreach ($histori as $ht): ?>
+                        <?php if ($ht->STATUS_TPENGAJUAN === 'Selesai') : ?>
                         <tr>
-                           <td>1</td>
-                           <td>Ilham</td>
-                           <td>UQPI</td>
-                           <td>Seminar IFEST</td>
-                           <td>12-07-2015</td>
+                           <td><?= $no++?></td>
+                           <td><?= $ht->NAMA_USER?></td>
+                           <td><?= $ht->NAMA_UKM?></td>
+                           <td><?= $ht->NAMA_ACARA?></td>
+                           <td><?= date('d F Y', strtotime($ht->TGL_ACARA))?></td>
                            <td>3</td>
-                           <td class="text-success"><i class="fas fa-check"></i> Selesai</td>
+                           <td class="text-success"><i class="fas fa-check"></i> <?= $ht->STATUS_TPENGAJUAN?></td>
                            <td>
                               <button class="btn btn-sm btn-primary">Download Pengajuan</button>
                               <button class="btn btn-sm btn-primary">Download SPJ</button>
                            </td>
                         </tr>
-
+                        <?php endif; ?>
+                        <?php endforeach; ?>
 
                      </tbody>
                   </table>

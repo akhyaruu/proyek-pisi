@@ -48,7 +48,7 @@ class Admin extends CI_Controller {
    
    public function revisiPengajuan()
    {
-      $config['upload_path']          = './uploads/revisi/';
+      $config['upload_path']          = './uploads/';
 		$config['allowed_types']        = 'pdf';
       $config['max_size']             = 2500;
       $this->upload->initialize($config);
@@ -90,7 +90,7 @@ class Admin extends CI_Controller {
 
    public function revisiSpj()
    {
-      $config['upload_path']          = './uploads/revisi/';
+      $config['upload_path']          = './uploads/';
 		$config['allowed_types']        = 'pdf';
       $config['max_size']             = 2500;
       $this->upload->initialize($config);
@@ -106,13 +106,21 @@ class Admin extends CI_Controller {
       }
    }
 
+   public function setujuiSpj($id)
+   {
+      $hasil = $this->AdminModel->setAgreeSpj($id);
+      $this->session->set_flashdata('pesan', $hasil);
+      redirect('admin/transaksipengajuan');
+   }
+
    // ------------------------------------------------------- histori pengajuan
 
    public function historipengajuan()
    {
+      $data['histori'] = $this->AdminModel->getAllHistori();
       $this->load->view('themes/admin/sidebar');
       $this->load->view('themes/admin/topbar');
-      $this->load->view('admin/histori_transaksi');
+      $this->load->view('admin/histori_transaksi', $data);
       $this->load->view('themes/admin/footer');
    }
    
