@@ -32,7 +32,7 @@
                            <th scope="col">Tgl Acara</th>
                            <th scope="col">Total Revisi</th>
                            <th scope="col">Status</th>
-                           <th scope="col">Aksi</th>
+                           <th scope="col">Download File</th>
                         </tr>
                      </thead>
                      <tbody id="tBodyTransaksi">
@@ -45,11 +45,12 @@
                            <td><?= $ht->NAMA_UKM?></td>
                            <td><?= $ht->NAMA_ACARA?></td>
                            <td><?= date('d F Y', strtotime($ht->TGL_ACARA))?></td>
-                           <td>3</td>
+                           <td><?= $ht->JUMLAH_REV + $ht->JUMLAH_REV_SPJ?></td>
                            <td class="text-success"><i class="fas fa-check"></i> <?= $ht->STATUS_TPENGAJUAN?></td>
                            <td>
-                              <button class="btn btn-sm btn-primary">Download Pengajuan</button>
-                              <button class="btn btn-sm btn-primary">Download SPJ</button>
+                              <a href="<?= site_url('admin/downloadPengajuanTransaksi/'.$ht->ID_TPENGAJUAN)?>"
+                                 class="btn btn-sm btn-primary">Pengajuan</a>
+                              <a href="" class="btn btn-sm btn-primary">SPJ</a>
                            </td>
                         </tr>
                         <?php endif; ?>
@@ -58,6 +59,7 @@
                      </tbody>
                   </table>
                </div>
+               <?= $this->pagination->create_links(); ?>
 
             </div>
          </div>

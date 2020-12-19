@@ -101,11 +101,12 @@ class AdminModel extends CI_Model {
    public function setRevisiSpj($namaBerkas)
    {
       $id = $this->input->post('idrevisi');
-      // $totalRevisi = $this->db->get_where($this->_pengajuan, ["ID_TPENGAJUAN" => $id])->row()->JUMLAH_REV;
+      $totalRevisi = $this->db->get_where($this->_tpengajuan, ["ID_TPENGAJUAN" => $id])->row()->JUMLAH_REV_SPJ;
       $data = array(
          'STATUS_TPENGAJUAN' => 'Revisi SPJ',
          'URL_SPJ' => $namaBerkas,
-         'TGL_REV_SPJ' => date("Y-m-d")
+         'TGL_REV_SPJ' => date("Y-m-d"),
+         'JUMLAH_REV_SPJ' => $totalRevisi + 1
       ); 
       $this->db->where('ID_TPENGAJUAN', $id)->update($this->_tpengajuan, $data);
       return 'Revisi berhasil dikirim';
@@ -135,6 +136,13 @@ class AdminModel extends CI_Model {
       ->join('pengajuan', 'pengajuan.ID_PENGAJUAN = transaksipengajuan.ID_PENGAJUAN')
       ->join('user', 'user.ID_USER = pengajuan.ID_USER')
       ->get()->num_rows();
+   }
+
+   public function downloadPengajuanTransaksi($id)
+   {
+      return $this->db->select('*')->from($this->_tpengajuan)
+         ->join('pengajuan', 'pengajuan.ID_PENGAJUAN = transaksipengajuan.ID_PENGAJUAN')
+         ->where('transaksipengajuan.ID_TPENGAJUAN', $id)->get()->row()->URL_PENGAJUAN;
    }
 
 }
