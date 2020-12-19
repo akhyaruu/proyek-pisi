@@ -57,12 +57,12 @@
             <?php endif; ?>
 
             <td>
-               <?php if ($pj['STATUS_PENGAJUAN'] == 'Antri') : ?>
+               <?php if ($pj['STATUS_PENGAJUAN'] !== 'Disetujui' && $pj['STATUS_PENGAJUAN'] !== 'Revisi' &&  $pj['STATUS_PENGAJUAN'] !== 'Menyerahkan Revisi') : ?>
                <a href="<?=base_url(); ?>user/hapus/<?= $pj['ID_PENGAJUAN']; ?>" n
                      class="badge badge-danger tombol-hapus ml-1"
                      onclick="return confirm('apakah kamu yakin menghapus pengajuan ini');">hapus</a>
                <?php endif; ?>
-               <?php if ($pj['STATUS_PENGAJUAN'] == 'Revisi' &&  $pj['STATUS_PENGAJUAN'] == 'Antri') : ?>
+               <?php if ($pj['STATUS_PENGAJUAN'] !== 'Disetujui' &&  $pj['STATUS_PENGAJUAN'] !== 'Menyerahkan Revisi') : ?>
                <a href="<?=base_url(); ?>user/ubah/<?= $pj['ID_PENGAJUAN']; ?>" n
                   class="badge badge-warning tombol-hapus ml-1 tampilModalUbah" data-toggle="modal"
                   data-target="#formModal" data-id="<?= $pj['ID_PENGAJUAN']; ?>">ubah</a>

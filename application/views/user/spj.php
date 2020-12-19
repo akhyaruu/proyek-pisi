@@ -54,7 +54,7 @@
             <a href="<?=base_url(); ?>user/uploadSpj/<?= $pj['ID_TPENGAJUAN']; ?>"  class="badge badge-primary ml-1 tampilModalSpj" data-toggle="modal"
                   data-target="#formModalSpj" data-id="<?= $pj['ID_TPENGAJUAN']; ?>">spj</a>
             <?php endif; ?>
-               <?php if ($pj['STATUS_TPENGAJUAN'] == 'Revisi') : ?>
+               <?php if ($pj['STATUS_TPENGAJUAN'] == 'Revisi SPJ') : ?>
                <a href="<?=base_url(); ?>user/revisiSpj/<?= $pj['ID_TPENGAJUAN']; ?>"  class="badge badge-success ml-1 tampilModalRevisiSPJ" data-toggle="modal"
                   data-target="#formModalSpj" data-id="<?= $pj['ID_TPENGAJUAN']; ?>">revisi</a>
                <?php endif; ?>
