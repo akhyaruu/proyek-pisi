@@ -1,12 +1,21 @@
-<div class="container mt-5">
-   <h1>Form Pengajuan Kegiatan</h1>
-   <h2>NIM : <?=$this->session->userdata('NIM')?></h2>
-   <h2>Nama : <?=$this->session->userdata('NAMA_USER')?></h2>
-   <div class="row mb-3">
+
+   
+   <div class="card mt-5">
+  <div class="card-header ">
+  <b>Form Pengajuan Kegiatan</b>
+  </div>
+  <div class="card-body">
+    
+    <p class="card-text"><b>NIM : <?=$this->session->userdata('NIM')?></b></p>
+    <p class="card-text"><b>Nama : <?=$this->session->userdata('NAMA_USER')?></b></p>
+  </div>
+</div>
+
+   <div class="row mt-3">
       <div class="col-lg-6">
-         <button type="button" class="btn btn-primary tombolTambahData" data-toggle="modal" data-target="#formModal">
+      <a><button type="button" class="btn btn-primary tombolTambahData" data-toggle="modal" data-target="#formModal">
             tambah data
-         </button>
+         </button></a>
       </div>
    </div>
    <?php if ($this->session->flashdata('pesan')):?>
@@ -19,7 +28,7 @@
       </div>
    </div>
    <?php endif; ?>
-   <table class="table table-bordered">
+   <table class="table table-bordered mt-3">
       <thead>
          <tr>
             <th scope="col" class="table-dark">No</th>
@@ -36,20 +45,34 @@
             <td><?= ++$start?></td>
             <td><?= $pj['NAMA_UKM']?></td>
             <td><?= $pj['NAMA_ACARA']?></td>
-            <td><?= $pj['TGL_ACARA']?></td>
-            <td><?= $pj['STATUS_PENGAJUAN']?> </td>
-            <td><a href="<?=base_url(); ?>user/hapus/<?= $pj['ID_PENGAJUAN']; ?>" n
-                  class="badge badge-danger tombol-hapus ml-1"
-                  onclick="return confirm('apakah kamu yakin menghapus pengajuan ini');">hapus</a>
+            <td><?= date('d F Y', strtotime($pj['TGL_ACARA']))?></td>
+            <?php if ($pj['STATUS_PENGAJUAN'] == 'Antri') : ?>
+            <td><i class="fas fa-hourglass-start"></i> Antri</td>
+            <?php elseif ($pj['STATUS_PENGAJUAN'] == 'Revisi') : ?>
+            <td class="text-warning"><i class="fas fa-undo"></i> Revisi</td>
+            <?php elseif ($pj['STATUS_PENGAJUAN'] == 'Menyerahkan Revisi'): ?>
+            <td class="text-success"><i class="far fa-file-pdf"></i></i> Revisi Masuk</td>
+            <?php else :?>
+            <td class="text-success"><i class="fas fa-check"></i>Disetujui</td>
+            <?php endif; ?>
+
+            <td>
+               <?php if ($pj['STATUS_PENGAJUAN'] == 'Antri') : ?>
+               <a href="<?=base_url(); ?>user/hapus/<?= $pj['ID_PENGAJUAN']; ?>" n
+                     class="badge badge-danger tombol-hapus ml-1"
+                     onclick="return confirm('apakah kamu yakin menghapus pengajuan ini');">hapus</a>
+               <?php endif; ?>
+               <?php if ($pj['STATUS_PENGAJUAN'] == 'Revisi' &&  $pj['STATUS_PENGAJUAN'] == 'Antri') : ?>
                <a href="<?=base_url(); ?>user/ubah/<?= $pj['ID_PENGAJUAN']; ?>" n
                   class="badge badge-warning tombol-hapus ml-1 tampilModalUbah" data-toggle="modal"
                   data-target="#formModal" data-id="<?= $pj['ID_PENGAJUAN']; ?>">ubah</a>
+               <?php endif; ?>
                <?php if ($pj['STATUS_PENGAJUAN'] == 'Revisi') : ?>
                <a href="<?=base_url(); ?>user/revisi/<?= $pj['ID_PENGAJUAN']; ?>"  class="badge badge-success ml-1 tampilModalRevisi" data-toggle="modal"
                   data-target="#formModalRevisi" data-id="<?= $pj['ID_PENGAJUAN']; ?>">revisi</a>
                <?php endif; ?>
 
-               <a href="" class="badge badge-primary ml-1">spj</a>
+               
             </td>
          </tr>
          <?php endforeach; ?>
@@ -58,7 +81,7 @@
    <?= $this->pagination->create_links(); ?>
 
    <!-- logout -->
-   <a href="<?= base_url('login/logout')?>"><button class="btn btn-warning mb-3">Keluar</button></a>
+   
 
 </div>
 
@@ -143,12 +166,5 @@
          </div>
       </div>
       </div>
-      <script>
-$(document).ready(function() {
-   $("#btnRevisi").click(function() {
-      $('#id_rev').val($('#btnRevisi').val());
-   });
 
-});
-</script>
       
