@@ -1,7 +1,7 @@
 $(function() {
 
     $('.tombolTambahData').on('click', function() {
-        $('#formModalLabel').html('Tambah Data Mahasiswa');
+        $('#formModalLabel').html('Tambah Data Pengajuan');
         $('.modal-footer button[type=submit]').html('Tambah Data');
         
     });
@@ -9,7 +9,7 @@ $(function() {
 
     $('.tampilModalUbah').on('click', function() {
         
-        $('#formModalLabel').html('Ubah Data Mahasiswa');
+        $('#formModalLabel').html('Ubah Data Pengajuan');
         $('.modal-footer button[type=submit]').html('Ubah Data');
         $('.modal-body form').attr('action', 'http://localhost/proyekpisi/user/ubah');
 
@@ -30,5 +30,31 @@ $(function() {
         });
         
     });
+    $('.tampilModalRevisi').on('click', function() {
+        
+        $('#formModalLabelRevisi').html('coba');
+        $('.modal-footer button[type=submit]').html('Ubah Data revisi');
+        $('.modal-body form').attr('action', 'http://localhost/proyekpisi/user/revisi');
 
+        const id = $(this).data('id');
+        
+        $.ajax({
+            url: 'http://localhost/proyekpisi/user/getubah',
+            data: {id : id},
+            method: 'post',
+            dataType: 'json',
+            success: function(data) {
+                console.log(data);
+                $('#id_rev').val(data.ID_PENGAJUAN);
+            }
+        });
+        
+    });
+   
+
+
+
+});
+$(function() {
+    
 });

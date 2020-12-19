@@ -15,12 +15,27 @@
       <div class="col-md-6">
          <p class="mr-2 d-block d-md-inline">Berdasarkan tgl</p>
          <input type="date">
-         <!-- <span>-</span> -->
          <input type="date">
       </div>
    </div>
 
-   <!-- Content Row -->
+   <?php if ($this->session->flashdata('pesan')) : ?>
+   <div class="alert alert-success alert-dismissible fade show" role="alert">
+      <?= $this->session->flashdata('pesan')?>
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+         <span aria-hidden="true">&times;</span>
+      </button>
+   </div>
+   <?php elseif ($this->session->flashdata('error')) :?>
+   <div class="alert alert-warning alert-dismissible fade show" role="alert">
+      <?= $this->session->flashdata('error')?>
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+         <span aria-hidden="true">&times;</span>
+      </button>
+   </div>
+   <?php endif; ?>
+
+
    <!-- Content Row -->
    <div class="row mb-5">
       <div class="col-md-12">
@@ -40,52 +55,52 @@
                         </tr>
                      </thead>
                      <tbody id="tBodyTransaksi">
+                        <?php $no = 1?>
+                        <?php foreach ($transaksi as $tr): ?>
+
+                        <?php if ($tr->STATUS_TPENGAJUAN !== 'Selesai') : ?>
                         <tr>
-                           <td>1</td>
-                           <td>UQPI</td>
-                           <td>Kegiatan Baru</td>
-                           <td>20-07-2000</td>
+                           <td><?= $no++?></td>
+                           <td><?= $tr->NAMA_UKM?></td>
+                           <td><?= $tr->NAMA_ACARA?></td>
+                           <td><?= date('d F Y', strtotime($tr->TGL_ACARA))?></td>
+                           <?php if ($tr->TGL_REV_SPJ === null) : ?>
                            <td>Belum Revisi</td>
+                           <?php else : ?>
+                           <td><?= date('d F Y', strtotime($tr->TGL_REV_SPJ))?></td>
+                           <?php endif; ?>
+
+                           <?php if ($tr->STATUS_TPENGAJUAN === 'Sedang Berjalan') : ?>
                            <td class="text-secondary"><i class="fas fa-hourglass-half"></i> Sedang Berjalan</td>
-                           <td>
-                              <button class="btn btn-sm btn-primary" disabled>Download SPJ</button>
-                              <button class="btn btn-sm btn-warning" disabled>Revisi</button>
-                              <button class="btn btn-sm btn-success" disabled>Selesai</button>
-                           </td>
-                        </tr>
-                        <tr>
-                           <td>2</td>
-                           <td>UQPI</td>
-                           <td>Kegiatan Baru</td>
-                           <td>20-07-2000</td>
-                           <td>Belum Revisi</td>
+                           <?php elseif ($tr->STATUS_TPENGAJUAN == 'Revisi SPJ') : ?>
+                           <td class="text-warning "><i class="fas fa-undo"></i> Revisi SPJ</td>
+                           <?php else : ?>
                            <td class="text-success"><i class="far fa-file-pdf"></i> Menyerahkan SPJ</td>
+                           <?php endif; ?>
+
                            <td>
-                              <button class="btn btn-sm btn-primary">Download SPJ</button>
-                              <button class="btn btn-sm btn-warning" data-toggle="modal"
-                                 data-target="#modalRevisi">Revisi</button>
-                              <button class="btn btn-sm btn-success">Selesai</button>
+                              <?php if ($tr->STATUS_TPENGAJUAN === 'Menyerahkan SPJ') : ?>
+                              <a href="<?= site_url('admin/downloadSpj/'.$tr->ID_TPENGAJUAN)?>"
+                                 class="btn btn-sm btn-primary">Download SPJ</a>
+                              <button id="bRevisi" class="btn btn-sm btn-warning" data-toggle="modal"
+                                 data-target="#modalRevisi" value="<?= $tr->ID_TPENGAJUAN?>">Revisi</button>
+                              <a href="<?= site_url('admin/setujuiSpj/'.$tr->ID_TPENGAJUAN)?>"
+                                 onclick="return confirm('apakah kamu yakin mensetujui spj kegiatan <?= $tr->NAMA_ACARA?> ?')"
+                                 class="btn btn-sm btn-success">Selesai</a>
+                              <?php else : ?>
+                              <span class="text-info font-weight-bold">Menunggu SPJ</span>
+                              <?php endif; ?>
                            </td>
                         </tr>
-                        <tr>
-                           <td>2</td>
-                           <td>UQPI</td>
-                           <td>Kegiatan Baru</td>
-                           <td>20-07-2000</td>
-                           <td>31-07-2000</td>
-                           <td class="text-warning"><i class="fas fa-undo"></i> Revisi SPJ</td>
-                           <td>
-                              <button class="btn btn-sm btn-primary" disabled>Download SPJ</button>
-                              <button class="btn btn-sm btn-warning">Revisi</button>
-                              <button class="btn btn-sm btn-success">Selesai</button>
-                           </td>
-                        </tr>
+                        <?php endif; ?>
+
+                        <?php endforeach; ?>
 
                      </tbody>
                   </table>
                </div>
 
-               <nav aria-label="Page navigation example">
+               <!-- <nav aria-label="Page navigation example">
                   <ul class="pagination">
                      <li class="page-item">
                         <a class="page-link" href="#" aria-label="Previous">
@@ -101,7 +116,7 @@
                         </a>
                      </li>
                   </ul>
-               </nav>
+               </nav> -->
 
             </div>
          </div>
@@ -118,12 +133,18 @@
                   <span aria-hidden="true">&times;</span>
                </button>
             </div>
-            <div class="modal-body">
-               ...
-            </div>
-            <div class="modal-footer">
-               <button type="button" class="btn btn-primary">Kirim ke pengaju</button>
-            </div>
+            <form action="<?= site_url('admin/revisiSpj')?>" method="post" enctype="multipart/form-data">
+               <div class="modal-body">
+                  Masukan file revisi spj
+                  <div>
+                     <input type="file" class="mt-3" name="filerevisi">
+                     <input id="idRevisi" type="text" name="idrevisi" value="" hidden>
+                  </div>
+               </div>
+               <div class="modal-footer">
+                  <button type="submit" class="btn btn-primary">Submit</button>
+               </div>
+            </form>
          </div>
       </div>
    </div>
@@ -134,3 +155,12 @@
 
 </div>
 <!-- End of Main Content -->
+
+<script>
+$(document).ready(function() {
+   $("#bRevisi").click(function() {
+      $('#idRevisi').val($('#bRevisi').val());
+   });
+
+});
+</script>
