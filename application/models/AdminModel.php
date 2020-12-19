@@ -11,12 +11,20 @@ class AdminModel extends CI_Model {
    public $nama_ukm;
    public $nama_acara;
 
-   public function getAllPengajuan()
+   public function getAllPengajuan($limit, $start)
    {
       return $this->db->select('*')->from($this->_pengajuan)
          ->join('user', 'user.id_user = pengajuan.id_user')
+         ->limit($limit, $start)
          ->order_by('pengajuan.id_pengajuan', 'DESC')
          ->get()->result();
+   }
+
+   public function getCountPengajuan()
+   {
+      return $this->db->select('*')->from($this->_pengajuan)
+         ->join('user', 'user.id_user = pengajuan.id_user')
+         ->get()->num_rows();
    }
 
    public function downloadPengajuan($id)
@@ -56,14 +64,33 @@ class AdminModel extends CI_Model {
       return 'Data pengajuan UKM '.$namaPengaju.' berhasil dihapus';
    }
 
+   public function searchPengajuan($nilai)
+   {
+      return $this->db->select('*')->from($this->_pengajuan)
+         ->join('user', 'user.ID_USER = pengajuan.ID_USER')
+         ->like('NAMA_USER', $nilai, 'after')
+         ->or_like('NAMA_UKM', $nilai, 'after')
+         ->or_like('NAMA_ACARA', $nilai, 'after')
+         ->order_by('pengajuan.ID_PENGAJUAN', 'DESC')
+         ->get()->result();
+   }
+
    // ------------------------------------------------------- transaksi pengajuan
 
-   public function getAllTransaksi()
+   public function getAllTransaksi($limit, $start)
    {
       return $this->db->select('*')->from($this->_pengajuan)
       ->join('transaksipengajuan', 'transaksipengajuan.ID_PENGAJUAN = pengajuan.ID_PENGAJUAN')
+      ->limit($limit, $start)
       ->order_by('transaksipengajuan.ID_PENGAJUAN', 'DESC')
       ->get()->result();
+   }
+
+   public function getCountTransaksi()
+   {
+      return $this->db->select('*')->from($this->_pengajuan)
+      ->join('transaksipengajuan', 'transaksipengajuan.ID_PENGAJUAN = pengajuan.ID_PENGAJUAN')
+      ->get()->num_rows();
    }
 
    public function downloadSpj($id)
@@ -92,13 +119,22 @@ class AdminModel extends CI_Model {
 
    // ------------------------------------------------------- histori transaksi
 
-   public function getAllHistori()
+   public function getAllHistori($limit, $start)
    {
       return $this->db->select('*')->from($this->_tpengajuan)
       ->join('pengajuan', 'pengajuan.ID_PENGAJUAN = transaksipengajuan.ID_PENGAJUAN')
       ->join('user', 'user.ID_USER = pengajuan.ID_USER')
+      ->limit($limit, $start)
       ->order_by('transaksipengajuan.ID_TPENGAJUAN', 'DESC')
       ->get()->result();
+   }
+
+   public function getCountHistori()
+   {
+      return $this->db->select('*')->from($this->_tpengajuan)
+      ->join('pengajuan', 'pengajuan.ID_PENGAJUAN = transaksipengajuan.ID_PENGAJUAN')
+      ->join('user', 'user.ID_USER = pengajuan.ID_USER')
+      ->get()->num_rows();
    }
 
 }

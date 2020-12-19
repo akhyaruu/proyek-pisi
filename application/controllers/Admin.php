@@ -22,11 +22,45 @@ class Admin extends CI_Controller {
       $this->load->view('themes/admin/footer');
    }
 
-   // ------------------------------------------------------- pengajuan baru
+   // -------------------------------------------------------------- pengajuan baru
 
    public function pengajuanbaru() 
    {
-      $data['pengajuan'] = $this->AdminModel->getAllPengajuan();
+      $config['base_url'] = 'http://localhost/proyekpisi/admin/pengajuanbaru';
+      $config['total_rows'] = $this->AdminModel->getCountPengajuan();
+      $config['per_page'] = 10;
+
+      $config['full_tag_open'] = '<nav><ul class="pagination">';
+		$config['full_tag_close'] = ' </ul></nav>';
+
+		$config['first_link'] = 'First';
+		$config['first_tag_open'] = '<li class="page-item">';
+		$config['first_tag_close'] = '</li>';
+
+		$config['last_link'] = 'Last';
+		$config['last_tag_open'] = '<li class="page-item">';
+		$config['last_tag_close'] = '</li>';
+
+		$config['next_link'] = '&raquo';
+		$config['next_tag_open'] = '<li class="page-item">';
+		$config['next_tag_close'] = '</li>';
+
+		$config['prev_link'] = '&laquo';
+		$config['prev_tag_open'] = '<li class="page-item">';
+		$config['prev_tag_close'] = '</li>';
+
+		$config['cur_tag_open'] = '<li class="page-item active"><a class="page-link" href="#">';
+		$config['cur_tag_close'] = '</a></li>';
+
+		$config['num_tag_open'] = '<li class="page-item">';
+      $config['num_tag_close'] = '</li>';
+      
+      $config['attributes'] = array('class' => 'page-link');
+
+      $this->pagination->initialize($config);
+		
+      $data['start'] = $this->uri->segment(3);
+      $data['pengajuan'] = $this->AdminModel->getAllPengajuan($config['per_page'], $data['start']);
       $this->load->view('themes/admin/sidebar');
       $this->load->view('themes/admin/topbar');
       $this->load->view('admin/pengajuan_baru', $data);
@@ -71,11 +105,59 @@ class Admin extends CI_Controller {
       redirect('admin/pengajuanbaru');
    }
 
-   // ------------------------------------------------------- transaksi pengajuan
+   public function caripengajuan($nilai)
+   {
+      if($nilai != "zero") {
+         $pengajuan = $this->AdminModel->searchPengajuan($nilai);
+         echo json_encode($pengajuan);
+      } else {
+         $pengajuan = $this->db->select('*')->from($this->_pengajuan)
+            ->join('user', 'user.id_user = pengajuan.id_user')
+            ->order_by('pengajuan.id_pengajuan', 'DESC')
+            ->get()->result();
+         echo json_encode($pengajuan);
+      }
+   }
+
+   // -------------------------------------------------------------- transaksi pengajuan
 
    public function transaksipengajuan() 
    {
-      $data['transaksi'] = $this->AdminModel->getAllTransaksi();
+      $config['base_url'] = 'http://localhost/proyekpisi/admin/transaksipengajuan';
+      $config['total_rows'] = $this->AdminModel->getCountTransaksi();
+      $config['per_page'] = 10;
+
+      $config['full_tag_open'] = '<nav><ul class="pagination">';
+		$config['full_tag_close'] = ' </ul></nav>';
+
+		$config['first_link'] = 'First';
+		$config['first_tag_open'] = '<li class="page-item">';
+		$config['first_tag_close'] = '</li>';
+
+		$config['last_link'] = 'Last';
+		$config['last_tag_open'] = '<li class="page-item">';
+		$config['last_tag_close'] = '</li>';
+
+		$config['next_link'] = '&raquo';
+		$config['next_tag_open'] = '<li class="page-item">';
+		$config['next_tag_close'] = '</li>';
+
+		$config['prev_link'] = '&laquo';
+		$config['prev_tag_open'] = '<li class="page-item">';
+		$config['prev_tag_close'] = '</li>';
+
+		$config['cur_tag_open'] = '<li class="page-item active"><a class="page-link" href="#">';
+		$config['cur_tag_close'] = '</a></li>';
+
+		$config['num_tag_open'] = '<li class="page-item">';
+      $config['num_tag_close'] = '</li>';
+      
+      $config['attributes'] = array('class' => 'page-link');
+
+      $this->pagination->initialize($config);
+		
+      $data['start'] = $this->uri->segment(3);
+      $data['transaksi'] = $this->AdminModel->getAllTransaksi($config['per_page'], $data['start']);
       $this->load->view('themes/admin/sidebar');
       $this->load->view('themes/admin/topbar');
       $this->load->view('admin/transaksi_pengajuan', $data);
@@ -113,11 +195,45 @@ class Admin extends CI_Controller {
       redirect('admin/transaksipengajuan');
    }
 
-   // ------------------------------------------------------- histori pengajuan
+   // -------------------------------------------------------------- histori pengajuan
 
    public function historipengajuan()
    {
-      $data['histori'] = $this->AdminModel->getAllHistori();
+      $config['base_url'] = 'http://localhost/proyekpisi/admin/historipengajuan';
+      $config['total_rows'] = $this->AdminModel->getCountHistori();
+      $config['per_page'] = 10;
+
+      $config['full_tag_open'] = '<nav><ul class="pagination">';
+		$config['full_tag_close'] = ' </ul></nav>';
+
+		$config['first_link'] = 'First';
+		$config['first_tag_open'] = '<li class="page-item">';
+		$config['first_tag_close'] = '</li>';
+
+		$config['last_link'] = 'Last';
+		$config['last_tag_open'] = '<li class="page-item">';
+		$config['last_tag_close'] = '</li>';
+
+		$config['next_link'] = '&raquo';
+		$config['next_tag_open'] = '<li class="page-item">';
+		$config['next_tag_close'] = '</li>';
+
+		$config['prev_link'] = '&laquo';
+		$config['prev_tag_open'] = '<li class="page-item">';
+		$config['prev_tag_close'] = '</li>';
+
+		$config['cur_tag_open'] = '<li class="page-item active"><a class="page-link" href="#">';
+		$config['cur_tag_close'] = '</a></li>';
+
+		$config['num_tag_open'] = '<li class="page-item">';
+      $config['num_tag_close'] = '</li>';
+      
+      $config['attributes'] = array('class' => 'page-link');
+
+      $this->pagination->initialize($config);
+		
+      $data['start'] = $this->uri->segment(3);
+      $data['histori'] = $this->AdminModel->getAllHistori($config['per_page'], $data['start']);
       $this->load->view('themes/admin/sidebar');
       $this->load->view('themes/admin/topbar');
       $this->load->view('admin/histori_transaksi', $data);

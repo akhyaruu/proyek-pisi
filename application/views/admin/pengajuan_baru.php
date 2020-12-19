@@ -10,7 +10,7 @@
          <div class="input-group-prepend">
             <span class="input-group-text" id="basic-addon1"> <i class="fas fa-search"></i></span>
          </div>
-         <input id="cariTransaksi" type="text" class="form-control" placeholder="Cari pengajuan...">
+         <input id="cariPengajuan" type="text" class="form-control" placeholder="Cari pengajuan...">
       </div>
       <div class="col-md-4">
          <p class="mr-4 d-block d-md-inline">Berdasarkan status</p>
@@ -56,7 +56,7 @@
                         </tr>
                      </thead>
 
-                     <tbody id="tBodyTransaksi">
+                     <tbody id="tBodyPengajuan">
                         <?php $no = 1?>
                         <?php foreach ($pengajuan as $pj): ?>
 
@@ -99,6 +99,8 @@
 
                   </table>
                </div>
+               <?= $this->pagination->create_links(); ?>
+
 
             </div>
          </div>
@@ -142,8 +144,23 @@
 
 <script>
 $(document).ready(function() {
+
    $("#bRevisi").click(function() {
       $('#idRevisi').val($('#bRevisi').val());
+   });
+
+   // cari pengajuan baru
+   $("#cariPengajuan").keyup(function() {
+      const nilai = $(this).val();
+      if (nilai) {
+         $.get("<?= site_url('admin/caripengajuan/')?>" + nilai, function(response) {
+            const data = JSON.parse(response);
+            let output = '';
+            // $("#tBodyPengajuan").empty();
+
+         });
+      }
+
    });
 
 });
