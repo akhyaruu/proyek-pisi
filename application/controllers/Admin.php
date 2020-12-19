@@ -240,5 +240,10 @@ class Admin extends CI_Controller {
       $this->load->view('themes/admin/footer');
    }
    
+   public function downloadPengajuanTransaksi($id)
+   {
+      $namaFile = $this->AdminModel->downloadPengajuanTransaksi($id);
+      force_download('uploads/'.$namaFile, NULL);
+   }
    
 }  

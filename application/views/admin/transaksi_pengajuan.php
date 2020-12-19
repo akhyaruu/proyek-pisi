@@ -6,16 +6,22 @@
    </div>
 
    <div class="row">
-      <div class="input-group col-md-6 mb-3">
-         <div class="input-group-prepend">
-            <span class="input-group-text" id="basic-addon1"> <i class="fas fa-search"></i></span>
-         </div>
-         <input id="cariTransaksi" type="text" class="form-control" placeholder="Cari pengajuan...">
+      <div class="form-group col-md-6">
+         <label for="exampleFormControlInput1">Cari Pengajuan</label>
+         <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="Ketikan disini...">
       </div>
-      <div class="col-md-6">
+      <!-- <div class="col-md-6">
          <p class="mr-2 d-block d-md-inline">Berdasarkan tgl</p>
          <input type="date">
          <input type="date">
+      </div> -->
+      <div class="form-group col-md-6">
+         <label for="exampleFormControlSelect1">Filter Berdasarkan Status</label>
+         <select class="form-control" id="statusPengajuan">
+            <option value="Antri">Antri</option>
+            <option value="Revisi">Revisi</option>
+            <option value="Menyerahkan Revisi">Menyerahkan Revisi</option>
+         </select>
       </div>
    </div>
 

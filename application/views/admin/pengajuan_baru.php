@@ -6,7 +6,7 @@
    </div>
 
    <div class="row">
-      <div class="input-group col-md-8 mb-3">
+      <!-- <div class="input-group col-md-8 mb-3">
          <div class="input-group-prepend">
             <span class="input-group-text" id="basic-addon1"> <i class="fas fa-search"></i></span>
          </div>
@@ -14,9 +14,17 @@
       </div>
       <div class="col-md-4">
          <p class="mr-4 d-block d-md-inline">Berdasarkan status</p>
-         <select id="cars">
-            <option value="volvo">Antri</option>
-            <option value="volvo">Revisi</option>
+         <select id="statusPengajuan">
+            <option value="Antri">Antri</option>
+            <option value="Revisi">Revisi</option>
+         </select>
+      </div> -->
+      <div class="form-group col-md-4">
+         <label for="exampleFormControlSelect1">Filter Berdasarkan Status</label>
+         <select class="form-control" id="statusPengajuan">
+            <option value="Antri">Antri</option>
+            <option value="Revisi">Revisi</option>
+            <option value="Menyerahkan Revisi">Menyerahkan Revisi</option>
          </select>
       </div>
    </div>
@@ -73,7 +81,7 @@
                            <?php elseif ($pj->STATUS_PENGAJUAN == 'Revisi') : ?>
                            <td class="text-warning"><i class="fas fa-undo"></i> Revisi</td>
                            <?php else : ?>
-                           <td class="text-success"><i class="far fa-file-pdf"></i></i> Revisi Masuk</td>
+                           <td class="text-success"><i class="far fa-file-pdf"></i></i> Menyerahkan Revisi</td>
                            <?php endif; ?>
 
                            <td>
