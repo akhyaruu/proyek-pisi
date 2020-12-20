@@ -41,7 +41,8 @@
                            <td>
                               <a href="<?= site_url('admin/downloadPengajuanTransaksi/'.$ht->ID_TPENGAJUAN)?>"
                                  class="btn btn-sm btn-primary">Pengajuan</a>
-                              <a href="" class="btn btn-sm btn-primary">SPJ</a>
+                              <a href="<?= site_url('admin/downloadPengajuanSPJ/'.$ht->ID_TPENGAJUAN)?>"
+                              class="btn btn-sm btn-primary">SPJ</a>
                            </td>
                         </tr>
                         <?php endif; ?>

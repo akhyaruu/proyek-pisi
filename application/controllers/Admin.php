@@ -237,5 +237,9 @@ class Admin extends CI_Controller {
       $namaFile = $this->AdminModel->downloadPengajuanTransaksi($id);
       force_download('uploads/'.$namaFile, NULL);
    }
-   
+   public function downloadPengajuanSPJ($id)
+   {
+      $namaFile = $this->AdminModel->downloadPengajuanSPJ($id);
+      force_download('uploads/'.$namaFile, NULL);
+   }
 }  

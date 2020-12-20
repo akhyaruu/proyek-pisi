@@ -151,4 +151,9 @@ class AdminModel extends CI_Model {
          ->where('transaksipengajuan.ID_TPENGAJUAN', $id)->get()->row()->URL_PENGAJUAN;
    }
 
+   public function downloadPengajuanSPJ($id)
+   {
+      return $this->db->get_where('transaksipengajuan', ["ID_TPENGAJUAN" => $id])->row()->URL_SPJ; 
+   }
+
 }
