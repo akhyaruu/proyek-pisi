@@ -130,16 +130,16 @@ public function spj()
 		
 		//$this->upload->initialize($config);
 	if ($this->form_validation->run() == false) {
-		$this->session->set_flashdata('pesan', '<div class="alert alert-danger" role="alert">gagal ditambahkan pastikan data terisi dengan benar</div>');
+		$this->session->set_flashdata('pesan', '<div class="alert alert-danger" role="alert">Gagal Ditambahkan Pastikan Data Terisi Dengan Benar</div>');
 		redirect('user');	
 	} else {
 		if(!$this->upload->do_upload('proposal')) {
-			$this->session->set_flashdata('pesan', '<div class="alert alert-danger" role="alert">anda belum melampirkan proposal</div>');
+			$this->session->set_flashdata('pesan', '<div class="alert alert-danger" role="alert">Anda Belum Melampirkan Proposal</div>');
 			redirect('user');	
 		} else {
 			$namaBerkas = $this->upload->data("file_name");
 			$this->UserModel->tambahPengajuan($namaBerkas);
-			$this->session->set_flashdata('pesan', '<div class="alert alert-success" role="alert">berhasil ditambahkan</div>');
+			$this->session->set_flashdata('pesan', '<div class="alert alert-success" role="alert">Berhasil Ditambahkan</div>');
 			redirect('user');	
 		}
 	}
@@ -148,7 +148,7 @@ public function spj()
    public function hapus($id)
    {
 		$this->UserModel->hapusDataPj($id);
-		$this->session->set_flashdata('pesan', '<div class="alert alert-success" role="alert">berhasil dihapus</div>');
+		$this->session->set_flashdata('pesan', '<div class="alert alert-success" role="alert">Berhasil Dihapus</div>');
 		redirect('user');
    }
 
@@ -174,16 +174,16 @@ public function spj()
 	
 	//$this->upload->initialize($config);
 if ($this->form_validation->run() == false) {
-	$this->session->set_flashdata('pesan', '<div class="alert alert-danger" role="alert">gagal ditambahkan pastikan data terisi dengan benar</div>');
+	$this->session->set_flashdata('pesan', '<div class="alert alert-danger" role="alert">Gagal Ditambahkan Pastikan Data Terisi Dengan Benar</div>');
 	redirect('user');	
 } else {
 	if(!$this->upload->do_upload('proposal')) {
-		$this->session->set_flashdata('pesan', '<div class="alert alert-danger" role="alert">anda belum melampirkan proposal</div>');
+		$this->session->set_flashdata('pesan', '<div class="alert alert-danger" role="alert">Anda Belum Melampirkan Proposal</div>');
 		redirect('user');	
 	} else {
 		$namaBerkas = $this->upload->data("file_name");
 		$this->UserModel->ubahDataPengajuan($namaBerkas);
-		$this->session->set_flashdata('pesan', '<div class="alert alert-success" role="alert">berhasil diupdate</div>');
+		$this->session->set_flashdata('pesan', '<div class="alert alert-success" role="alert">Berhasil Diupdate</div>');
 		redirect('user');	
 	}
 }
@@ -193,12 +193,12 @@ public function revisi()
    {
 	
 	if(!$this->upload->do_upload('proposal')) {
-		$this->session->set_flashdata('pesan', '<div class="alert alert-danger" role="alert">anda belum melampirkan proposal</div>');
+		$this->session->set_flashdata('pesan', '<div class="alert alert-danger" role="alert">Anda Belum Melampirkan Proposal</div>');
 		redirect('user');	
 	} else {
 		$namaBerkas = $this->upload->data("file_name");
 		$this->UserModel->ubahDataRevisi($namaBerkas);
-		$this->session->set_flashdata('pesan', '<div class="alert alert-success" role="alert">berhasil dikirim</div>');
+		$this->session->set_flashdata('pesan', '<div class="alert alert-success" role="alert">Berhasil Dikirim</div>');
 		redirect('user');	
 	}
    }
@@ -206,12 +206,12 @@ public function revisi()
    {
 	
 	if(!$this->upload->do_upload('proposal')) {
-		$this->session->set_flashdata('pesan', '<div class="alert alert-danger" role="alert">anda belum melampirkan proposal</div>');
+		$this->session->set_flashdata('pesan', '<div class="alert alert-danger" role="alert">Anda Belum Melampirkan Proposal</div>');
 		redirect('user/spj');	
 	} else {
 		$namaBerkas = $this->upload->data("file_name");
 		$this->UserModel->uploadDataSpj($namaBerkas);
-		$this->session->set_flashdata('pesan', '<div class="alert alert-success" role="alert">berhasil dikirim</div>');
+		$this->session->set_flashdata('pesan', '<div class="alert alert-success" role="alert">Berhasil Dikirim</div>');
 		redirect('user/spj');	
 	}
    }
@@ -219,12 +219,12 @@ public function revisi()
    {
 	
 	if(!$this->upload->do_upload('proposal')) {
-		$this->session->set_flashdata('pesan', '<div class="alert alert-danger" role="alert">anda belum melampirkan proposal</div>');
+		$this->session->set_flashdata('pesan', '<div class="alert alert-danger" role="alert">Anda Belum Melampirkan Proposal</div>');
 		redirect('user/spj');	
 	} else {
 		$namaBerkas = $this->upload->data("file_name");
 		$this->UserModel->ubahDataSpj($namaBerkas);
-		$this->session->set_flashdata('pesan', '<div class="alert alert-success" role="alert">berhasil dikirim</div>');
+		$this->session->set_flashdata('pesan', '<div class="alert alert-success" role="alert">Berhasil Dikirim</div>');
 		redirect('user/spj');	
 	}
    }

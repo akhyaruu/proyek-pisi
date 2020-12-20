@@ -24,7 +24,6 @@
       <?= $this->session->flashdata('pesan'); ?>
 
    </div>
-<<<<<<< HEAD
    <?php endif; ?>
    <div class="card shadow-sm mt-3">
       <div class="card-body">
@@ -61,16 +60,17 @@
                         <?php if ($pj['STATUS_PENGAJUAN'] !== 'Disetujui' && $pj['STATUS_PENGAJUAN'] !== 'Revisi' &&  $pj['STATUS_PENGAJUAN'] !== 'Menyerahkan Revisi') : ?>
                         <a href="<?=base_url(); ?>user/hapus/<?= $pj['ID_PENGAJUAN']; ?>" n
                               class="badge badge-danger tombol-hapus ml-1"
-                              onclick="return confirm('apakah kamu yakin menghapus pengajuan ini');">hapus</a>
+                              onclick="return confirm('apakah kamu yakin menghapus pengajuan ini');">Hapus</a>
                         <?php endif; ?>
                         <?php if ($pj['STATUS_PENGAJUAN'] !== 'Disetujui' &&  $pj['STATUS_PENGAJUAN'] !== 'Menyerahkan Revisi') : ?>
                         <a href="<?=base_url(); ?>user/ubah/<?= $pj['ID_PENGAJUAN']; ?>" n
                            class="badge badge-warning tombol-hapus ml-1 tampilModalUbah" data-toggle="modal"
-                           data-target="#formModal" data-id="<?= $pj['ID_PENGAJUAN']; ?>">ubah</a>
+                           data-target="#formModal" data-id="<?= $pj['ID_PENGAJUAN']; ?>">Ubah</a>
                         <?php endif; ?>
                         <?php if ($pj['STATUS_PENGAJUAN'] == 'Revisi') : ?>
                         <a href="<?=base_url(); ?>user/revisi/<?= $pj['ID_PENGAJUAN']; ?>"  class="badge badge-success ml-1 tampilModalRevisi" data-toggle="modal"
-                           data-target="#formModalRevisi" data-id="<?= $pj['ID_PENGAJUAN']; ?>">revisi</a>
+                           data-target="#formModalRevisi" data-id="<?= $pj['ID_PENGAJUAN']; ?>">Revisi</a>
+                           <a href="<?=base_url(); ?>user/downloadrevisi/<?= $pj['ID_PENGAJUAN']; ?>"  class="badge badge-primary ml-1 ">Download Revisi</a>
                         <?php endif; ?>
 
                         
@@ -87,67 +87,6 @@
 
    <!-- logout -->
    
-=======
-</div>
-<?php endif; ?>
-<table class="table table-bordered mt-3">
-   <thead>
-      <tr>
-         <th scope="col" class="table-dark">No</th>
-         <th scope="col" class="table-dark">Nama Ukm</th>
-         <th scope="col" class="table-dark">Nama Kegiatan</th>
-         <th scope="col" class="table-dark">Tgl Kegiatan</th>
-         <th scope="col" class="table-dark">Status</th>
-         <th scope="col" class="table-dark">Upload / Aksi</th>
-      </tr>
-   </thead>
-   <tbody>
-      <?php foreach($x['0'] as $pj): ?>
-      <tr>
-         <td><?= ++$start?></td>
-         <td><?= $pj['NAMA_UKM']?></td>
-         <td><?= $pj['NAMA_ACARA']?></td>
-         <td><?= date('d F Y', strtotime($pj['TGL_ACARA']))?></td>
-         <?php if ($pj['STATUS_PENGAJUAN'] == 'Antri') : ?>
-         <td><i class="fas fa-hourglass-start"></i> Antri</td>
-         <?php elseif ($pj['STATUS_PENGAJUAN'] == 'Revisi') : ?>
-         <td class="text-warning"><i class="fas fa-undo"></i> Revisi</td>
-         <?php elseif ($pj['STATUS_PENGAJUAN'] == 'Menyerahkan Revisi'): ?>
-         <td class="text-success"><i class="far fa-file-pdf"></i></i> Revisi Masuk</td>
-         <?php else :?>
-         <td class="text-success"><i class="fas fa-check"></i>Disetujui</td>
-         <?php endif; ?>
-
-         <td>
-            <?php if ($pj['STATUS_PENGAJUAN'] !== 'Disetujui' && $pj['STATUS_PENGAJUAN'] !== 'Revisi' &&  $pj['STATUS_PENGAJUAN'] !== 'Menyerahkan Revisi') : ?>
-            <a href="<?=base_url(); ?>user/hapus/<?= $pj['ID_PENGAJUAN']; ?>" n
-               class="badge badge-danger tombol-hapus ml-1"
-               onclick="return confirm('apakah kamu yakin menghapus pengajuan ini');">hapus</a>
-            <?php endif; ?>
-            <?php if ($pj['STATUS_PENGAJUAN'] !== 'Disetujui' &&  $pj['STATUS_PENGAJUAN'] !== 'Menyerahkan Revisi') : ?>
-            <a href="<?=base_url(); ?>user/ubah/<?= $pj['ID_PENGAJUAN']; ?>" n
-               class="badge badge-warning tombol-hapus ml-1 tampilModalUbah" data-toggle="modal"
-               data-target="#formModal" data-id="<?= $pj['ID_PENGAJUAN']; ?>">ubah</a>
-            <?php endif; ?>
-            <?php if ($pj['STATUS_PENGAJUAN'] == 'Revisi') : ?>
-            <a href="<?=base_url(); ?>user/revisi/<?= $pj['ID_PENGAJUAN']; ?>"
-               class="badge badge-success ml-1 tampilModalRevisi" data-toggle="modal" data-target="#formModalRevisi"
-               data-id="<?= $pj['ID_PENGAJUAN']; ?>">revisi</a>
-            <a href="<?=base_url(); ?>user/downloadrevisi/<?= $pj['ID_PENGAJUAN']; ?>"
-               class="badge badge-info ml-1">download revisi</a>
-            <?php endif; ?>
-
-
-         </td>
-      </tr>
-      <?php endforeach; ?>
-   </tbody>
-</table>
-<?= $this->pagination->create_links(); ?>
-
-<!-- logout -->
-
->>>>>>> 55fc29d25d1a2c886b0f7baaa09f305583dd0893
 
 </div>
 

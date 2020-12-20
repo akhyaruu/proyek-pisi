@@ -109,15 +109,13 @@ class UserModel extends CI_Model {
         $this->db->update('transaksipengajuan', $data);
     }
 
-<<<<<<< HEAD
     public function downloadSpj($id)
     {
        return $this->db->get_where('transaksipengajuan', ["ID_TPENGAJUAN" => $id])->row()->URL_SPJ;
-=======
+    }  
     public function downloadRevisiPengajuan($id)
     {
         return $this->db->get_where('pengajuan', ["ID_PENGAJUAN" => $id])->row()->URL_PENGAJUAN;
->>>>>>> 55fc29d25d1a2c886b0f7baaa09f305583dd0893
     }
 
 }
