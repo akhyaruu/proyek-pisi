@@ -5,6 +5,7 @@ class User extends CI_Controller {
 	
 	function __construct(){
 		parent::__construct();
+		$this->load->helper('download');
 		if($this->session->userdata('STATUS') !== TRUE && $this->session->userdata('LEVEL') !== "2"){
 			$this->session->sess_destroy();
 			redirect('login');
@@ -229,7 +230,7 @@ public function revisi()
    }
    public function downloadSpj($id)
    {
-      $namaFile = $this->AdminModel->downloadSpj($id);
+      $namaFile = $this->UserModel->downloadSpj($id);
       force_download('uploads/'.$namaFile, NULL);
    }
   

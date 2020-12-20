@@ -109,4 +109,9 @@ class UserModel extends CI_Model {
         $this->db->update('transaksipengajuan', $data);
     }
 
+    public function downloadSpj($id)
+    {
+       return $this->db->get_where('transaksipengajuan', ["ID_TPENGAJUAN" => $id])->row()->URL_SPJ;
+    }
+
 }
