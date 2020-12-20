@@ -234,5 +234,10 @@ public function revisi()
       force_download('uploads/'.$namaFile, NULL);
    }
   
+	public function downloadrevisi($id)
+	{
+		$namaFile = $this->UserModel->downloadRevisiPengajuan($id);
+      force_download('uploads/'.$namaFile, NULL);
+	}
    
 }

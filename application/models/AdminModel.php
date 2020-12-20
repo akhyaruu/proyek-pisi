@@ -5,11 +5,17 @@ class AdminModel extends CI_Model {
    private $_pengajuan = "pengajuan";
    private $_tpengajuan = "transaksipengajuan";
 
-   public $pengajuan;
-   public $id_user;
-   public $nama_pengaju;
-   public $nama_ukm;
-   public $nama_acara;
+   public function countPengajuan()
+   {
+      $pengajuanBaru = $this->db->from($this->_pengajuan)->count_all_results();
+      $revisiPengajuan = $this->db->select_sum('JUMLAH_REV')->get('pengajuan')->row()->JUMLAH_REV;
+      $data = array(
+         "pengajuanbaru" => $pengajuanBaru,
+         "revisipengajuan" => $revisiPengajuan,
+      );
+
+      return $data;
+   }
 
    public function getAllPengajuan($limit, $start)
    {
@@ -47,6 +53,7 @@ class AdminModel extends CI_Model {
    public function setRevisiPengajuan($namaBerkas)
    {
       $id = $this->input->post('idpengajuan');
+      $kegiatan = $this->db->get_where($this->_pengajuan, ["ID_PENGAJUAN" => $id])->row()->NAMA_ACARA;
       $totalRevisi = $this->db->get_where($this->_pengajuan, ["ID_PENGAJUAN" => $id])->row()->JUMLAH_REV;
       $data = array(
          'STATUS_PENGAJUAN' => 'Revisi',
@@ -54,7 +61,7 @@ class AdminModel extends CI_Model {
          'JUMLAH_REV' => $totalRevisi + 1
       ); 
       $this->db->where('ID_PENGAJUAN', $id)->update($this->_pengajuan, $data);
-      return 'Revisi berhasil dikirim';
+      return 'Revisi kegiatan '.$kegiatan. ' berhasil dikirim';
    }
 
    public function setDeletePengajuan($id)
@@ -64,15 +71,14 @@ class AdminModel extends CI_Model {
       return 'Data pengajuan UKM '.$namaPengaju.' berhasil dihapus';
    }
 
-   public function searchPengajuan($nilai)
+   public function setFilterPengajuan($nilai)
    {
       return $this->db->select('*')->from($this->_pengajuan)
-         ->join('user', 'user.ID_USER = pengajuan.ID_USER')
-         ->like('NAMA_USER', $nilai, 'after')
-         ->or_like('NAMA_UKM', $nilai, 'after')
-         ->or_like('NAMA_ACARA', $nilai, 'after')
-         ->order_by('pengajuan.ID_PENGAJUAN', 'DESC')
-         ->get()->result();
+      ->join('user', 'user.id_user = pengajuan.id_user')
+      ->where('STATUS_PENGAJUAN', $nilai)
+      ->order_by('pengajuan.id_pengajuan', 'DESC')
+      ->get()->result();
+      
    }
 
    // ------------------------------------------------------- transaksi pengajuan
