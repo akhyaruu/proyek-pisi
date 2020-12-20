@@ -5,15 +5,6 @@
       <h1 class="h3 mb-0 text-gray-800">Histori Transaksi Pengajuan</h1>
    </div>
 
-   <div class="row">
-      <div class="input-group col-md-12 mb-3">
-         <div class="input-group-prepend">
-            <span class="input-group-text" id="basic-addon1"> <i class="fas fa-search"></i></span>
-         </div>
-         <input id="cariTransaksi" type="text" class="form-control" placeholder="Cari pengajuan...">
-      </div>
-   </div>
-
    <a href="#" class="d-none mb-3 mt-1 d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
          class="fas fa-download fa-sm text-white-50"></i> Buat laporan</a>
    <!-- Content Row -->

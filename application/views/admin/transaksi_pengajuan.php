@@ -88,7 +88,7 @@
                               <?php if ($tr->STATUS_TPENGAJUAN === 'Menyerahkan SPJ') : ?>
                               <a href="<?= site_url('admin/downloadSpj/'.$tr->ID_TPENGAJUAN)?>"
                                  class="btn btn-sm btn-primary">Download SPJ</a>
-                              <button id="bRevisi" class="btn btn-sm btn-warning" data-toggle="modal"
+                              <button class="bRevisi btn btn-sm btn-warning" data-toggle="modal"
                                  data-target="#modalRevisi" value="<?= $tr->ID_TPENGAJUAN?>">Revisi</button>
                               <a href="<?= site_url('admin/setujuiSpj/'.$tr->ID_TPENGAJUAN)?>"
                                  onclick="return confirm('apakah kamu yakin mensetujui spj kegiatan <?= $tr->NAMA_ACARA?> ?')"
@@ -147,8 +147,9 @@
 
 <script>
 $(document).ready(function() {
-   $("#bRevisi").click(function() {
-      $('#idRevisi').val($('#bRevisi').val());
+   $(".bRevisi").click(function() {
+      $('#idRevisi').val($(this).val());
+
    });
 
 });
