@@ -5,8 +5,8 @@
       <h1 class="h3 mb-0 text-gray-800">Histori Transaksi Pengajuan</h1>
    </div>
 
-   <a href="#" class="d-none mb-3 mt-1 d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
-         class="fas fa-download fa-sm text-white-50"></i> Buat laporan</a>
+   <!-- <a href="#" class="d-none mb-3 mt-1 d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
+         class="fas fa-download fa-sm text-white-50"></i> Buat laporan</a> -->
    <!-- Content Row -->
    <div class="row mb-5">
       <div class="col-md-12">
@@ -42,7 +42,7 @@
                               <a href="<?= site_url('admin/downloadPengajuanTransaksi/'.$ht->ID_TPENGAJUAN)?>"
                                  class="btn btn-sm btn-primary">Pengajuan</a>
                               <a href="<?= site_url('admin/downloadPengajuanSPJ/'.$ht->ID_TPENGAJUAN)?>"
-                              class="btn btn-sm btn-primary">SPJ</a>
+                                 class="btn btn-sm btn-primary">SPJ</a>
                            </td>
                         </tr>
                         <?php endif; ?>
@@ -58,46 +58,6 @@
       </div>
    </div>
 
-   <!-- Modal Persetujuan -->
-   <div class="modal fade" id="modalPersetujuan" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-      <div class="modal-dialog">
-         <div class="modal-content">
-            <div class="modal-header">
-               <h5 class="modal-title" id="exampleModalLabel">Konfirmasi Ulang</h5>
-               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-               </button>
-            </div>
-            <div class="modal-body">
-               Apakah kamu yakin untuk menyetujui pengajuan ini?
-            </div>
-            <div class="modal-footer">
-               <button type="button" class="btn btn-primary">Ya, saya setuju</button>
-            </div>
-         </div>
-      </div>
-   </div>
-
-   <!-- Modal Revisi -->
-   <div class="modal fade" id="modalRevisi" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-      <div class="modal-dialog">
-         <div class="modal-content">
-            <div class="modal-header">
-               <h5 class="modal-title" id="exampleModalLabel">Kirim Revisi</h5>
-               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-               </button>
-            </div>
-            <div class="modal-body">
-               ...
-            </div>
-            <div class="modal-footer">
-               <button type="button" class="btn btn-primary">Kirim ke pengaju</button>
-            </div>
-         </div>
-      </div>
-   </div>
-
 
 
 </div>
@@ -105,9 +65,3 @@
 
 </div>
 <!-- End of Main Content -->
-
-<script>
-if (document.readyState === 'complete') {
-   console.log('ya');
-}
-</script>

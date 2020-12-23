@@ -140,21 +140,26 @@
 <script>
 $(document).ready(function() {
 
-   $(".bRevisi").click(function() {
+   $("#tBodyPengajuan").on("click", "button.bRevisi", function() {
       $('#idRevisi').val($(this).val());
-      $('#coba').text($(this).val());
    });
-
 
    // filter status
    $("#statusPengajuan").change(function() {
       const nilai = $(this).val();
-      $.get("<?= site_url('admin/filterpengajuan/')?>" + nilai, function(response) {
-         const data = JSON.parse(response);
+      $.post("<?= site_url('admin/filterpengajuan')?>", {
+         nilai: nilai
+      }, function(data) {
          let output = '';
          let bAksi = '';
          let bDelete = '';
          let bStatus = '';
+         let tanggal = '';
+
+         const monthNames = ["January", "February", "March", "April", "May", "June",
+            "July", "August", "September", "October", "November", "December"
+         ];
+
          $("#tBodyPengajuan").empty();
          data.map((data, index) => {
             if (data.STATUS_PENGAJUAN !== 'Revisi') {
@@ -177,13 +182,14 @@ $(document).ready(function() {
                   `<td class="text-success"><i class="far fa-file-pdf"></i></i> Menyerahkan Revisi</td>`;
             }
 
+            const tglAcara = new Date(`${data.TGL_ACARA}`);
             output += `
                <tr>
                   <td>${index+1}</td>
                   <td>${data.NAMA_USER}</td>
                   <td>${data.NAMA_UKM}</td>
                   <td>${data.NAMA_ACARA}</td>
-                  <td><?= date('d F Y', strtotime('${data.TGL_ACARA}'))?></td>
+                  <td>${tglAcara.getDate()} ${monthNames[tglAcara.getMonth()]} ${tglAcara.getFullYear()}</td>
                   ${bStatus}
                   <td>
                      ${bAksi}
@@ -194,8 +200,7 @@ $(document).ready(function() {
             `;
          });
          $("#tBodyPengajuan").append(output);
-
-      });
+      }, "json");
 
    });
 

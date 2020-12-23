@@ -105,9 +105,9 @@ class Admin extends CI_Controller {
       redirect('admin/pengajuanbaru');
    }
 
-   public function filterpengajuan($nilai)
+   public function filterpengajuan()
    {
-      $hasil = $this->AdminModel->setFilterPengajuan($nilai);
+      $hasil = $this->AdminModel->setFilterPengajuan($this->input->post('nilai'));
       echo json_encode($hasil);
    }
 
@@ -185,6 +185,18 @@ class Admin extends CI_Controller {
       $hasil = $this->AdminModel->setAgreeSpj($id);
       $this->session->set_flashdata('pesan', $hasil);
       redirect('admin/transaksipengajuan');
+   }
+
+   public function filtertransaksi()
+   {
+      $hasil = $this->AdminModel->setFilterTransaksi($this->input->post('nilai'));
+      echo json_encode($hasil);
+   }
+   
+   public function pencarianTransaksi()
+   {
+      $hasil = $this->AdminModel->searchTransaksi($this->input->post('nilai'));
+      echo json_encode($hasil);
    }
 
    // -------------------------------------------------------------- histori pengajuan
