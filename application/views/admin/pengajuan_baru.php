@@ -6,17 +6,12 @@
    </div>
 
    <div class="row">
-      <div class="input-group col-md-8 mb-3">
-         <div class="input-group-prepend">
-            <span class="input-group-text" id="basic-addon1"> <i class="fas fa-search"></i></span>
-         </div>
-         <input id="cariPengajuan" type="text" class="form-control" placeholder="Cari pengajuan...">
-      </div>
-      <div class="col-md-4">
-         <p class="mr-4 d-block d-md-inline">Berdasarkan status</p>
-         <select id="cars">
-            <option value="volvo">Antri</option>
-            <option value="volvo">Revisi</option>
+      <div class="form-group col-md-4">
+         <label for="exampleFormControlSelect1">Filter Berdasarkan Status</label>
+         <select class="form-control" id="statusPengajuan">
+            <option value="Antri">Antri</option>
+            <option value="Revisi">Revisi</option>
+            <option value="Menyerahkan Revisi">Menyerahkan Revisi</option>
          </select>
       </div>
    </div>
@@ -73,7 +68,7 @@
                            <?php elseif ($pj->STATUS_PENGAJUAN == 'Revisi') : ?>
                            <td class="text-warning"><i class="fas fa-undo"></i> Revisi</td>
                            <?php else : ?>
-                           <td class="text-success"><i class="far fa-file-pdf"></i></i> Revisi Masuk</td>
+                           <td class="text-success"><i class="far fa-file-pdf"></i></i> Menyerahkan Revisi</td>
                            <?php endif; ?>
 
                            <td>
@@ -84,7 +79,7 @@
                                  class="btn btn-sm btn-success"
                                  onclick="return confirm('apakah kamu yakin mensetujui pengajuan <?= $pj->NAMA_USER?> ?')">Disetujui</a>
                               <?php endif; ?>
-                              <button id="bRevisi" class="btn btn-sm btn-warning" data-toggle="modal"
+                              <button class="bRevisi btn btn-sm btn-warning" data-toggle="modal"
                                  data-target="#modalRevisi" value="<?= $pj->ID_PENGAJUAN?>">Revisi</button>
                               <?php if ($pj->STATUS_PENGAJUAN !== 'Revisi') : ?>
                               <a href="<?= site_url('admin/hapusPengajuan/'.$pj->ID_PENGAJUAN)?>"
@@ -145,23 +140,70 @@
 <script>
 $(document).ready(function() {
 
-   $("#bRevisi").click(function() {
-      $('#idRevisi').val($('#bRevisi').val());
+   $("#tBodyPengajuan").on("click", "button.bRevisi", function() {
+      $('#idRevisi').val($(this).val());
    });
 
-   // cari pengajuan baru
-   $("#cariPengajuan").keyup(function() {
+   // filter status
+   $("#statusPengajuan").change(function() {
       const nilai = $(this).val();
-      if (nilai) {
-         $.get("<?= site_url('admin/caripengajuan/')?>" + nilai, function(response) {
-            const data = JSON.parse(response);
-            let output = '';
-            // $("#tBodyPengajuan").empty();
+      $.post("<?= site_url('admin/filterpengajuan')?>", {
+         nilai: nilai
+      }, function(data) {
+         let output = '';
+         let bAksi = '';
+         let bDelete = '';
+         let bStatus = '';
+         let tanggal = '';
 
+         const monthNames = ["January", "February", "March", "April", "May", "June",
+            "July", "August", "September", "October", "November", "December"
+         ];
+
+         $("#tBodyPengajuan").empty();
+         data.map((data, index) => {
+            if (data.STATUS_PENGAJUAN !== 'Revisi') {
+               bAksi =
+                  `<a href="<?= site_url('admin/downloadPengajuan/').'${data.ID_PENGAJUAN}'?>"class="btn btn-sm btn-primary">Download Pengajuan</a>
+               <a href="<?= site_url('admin/setujuiPengajuan/').'${data.ID_PENGAJUAN}'?>"class="btn btn-sm btn-success"
+               onclick="return confirm('apakah kamu yakin mensetujui pengajuan ${data.NAMA_USER} ?')">Disetujui</a>`;
+
+               bDelete =
+                  `<a href="<?= site_url('admin/hapusPengajuan/${data.ID_PENGAJUAN}')?>"
+               class="btn btn-sm btn-danger" onclick="return confirm('apakah kamu yakin menghapus pengajuan ${data.NAMA_USER} ?')">Hapus</a>`;
+            }
+
+            if (data.STATUS_PENGAJUAN === 'Antri') {
+               bStatus = `<td><i class="fas fa-hourglass-start"></i> Antri</td>`;
+            } else if (data.STATUS_PENGAJUAN === 'Revisi') {
+               bStatus = `<td class="text-warning"><i class="fas fa-undo"></i> Revisi</td>`;
+            } else if (data.STATUS_PENGAJUAN === 'Menyerahkan Revisi') {
+               bStatus =
+                  `<td class="text-success"><i class="far fa-file-pdf"></i></i> Menyerahkan Revisi</td>`;
+            }
+
+            const tglAcara = new Date(`${data.TGL_ACARA}`);
+            output += `
+               <tr>
+                  <td>${index+1}</td>
+                  <td>${data.NAMA_USER}</td>
+                  <td>${data.NAMA_UKM}</td>
+                  <td>${data.NAMA_ACARA}</td>
+                  <td>${tglAcara.getDate()} ${monthNames[tglAcara.getMonth()]} ${tglAcara.getFullYear()}</td>
+                  ${bStatus}
+                  <td>
+                     ${bAksi}
+                     <button class="bRevisi btn btn-sm btn-warning" data-toggle="modal" data-target="#modalRevisi" value="${data.ID_PENGAJUAN}">Revisi</button>
+                     ${bDelete}
+                  </td>
+               </tr>
+            `;
          });
-      }
+         $("#tBodyPengajuan").append(output);
+      }, "json");
 
    });
+
 
 });
 </script>

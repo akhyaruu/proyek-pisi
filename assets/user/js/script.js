@@ -32,8 +32,8 @@ $(function() {
     });
     $('.tampilModalRevisi').on('click', function() {
         
-        $('#formModalLabelRevisi').html('coba');
-        $('.modal-footer button[type=submit]').html('Ubah Data revisi');
+        $('#formModalLabelRevisi').html('Revisi Proposal');
+        $('.modal-footer button[type=submit]').html('Upload');
         $('.modal-body form').attr('action', 'http://localhost/proyekpisi/user/revisi');
 
         const id = $(this).data('id');
@@ -50,11 +50,48 @@ $(function() {
         });
         
     });
-   
+
+    $('.tampilModalSpj').on('click', function() {
+        $('#formModalLabelSpj').html('Upload SPJ');
+        $('.modal-footer button[type=submit]').html('Upload');
+        const id = $(this).data('id');
+        
+        $.ajax({
+            url: 'http://localhost/proyekpisi/user/getspj',
+            data: {id : id},
+            method: 'post',
+            dataType: 'json',
+            success: function(data) {
+                console.log(data);
+                $('#id_rev').val(data.ID_TPENGAJUAN);
+            }
+        });
+        
+    });
+        
+
+
+    $('.tampilModalRevisiSPJ').on('click', function() {
+        
+        $('#formModalLabelSpj').html('Revisi SPJ');
+        $('.modal-footer button[type=submit]').html('Upload');
+        $('.modal-body form').attr('action', 'http://localhost/proyekpisi/user/revisiSpj');
+
+        const id = $(this).data('id');
+        
+        $.ajax({
+            url: 'http://localhost/proyekpisi/user/getspj',
+            data: {id : id},
+            method: 'post',
+            dataType: 'json',
+            success: function(data) {
+                console.log(data);
+                $('#id_rev').val(data.ID_TPENGAJUAN);
+            }
+        });
+        
+    });
 
 
 
-});
-$(function() {
-    
 });

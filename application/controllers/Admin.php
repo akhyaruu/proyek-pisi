@@ -18,7 +18,7 @@ class Admin extends CI_Controller {
 	{
       $this->load->view('themes/admin/sidebar');
       $this->load->view('themes/admin/topbar');
-      $this->load->view('admin/index');
+      $this->load->view('admin/index', $this->AdminModel->countPengajuan());
       $this->load->view('themes/admin/footer');
    }
 
@@ -105,18 +105,10 @@ class Admin extends CI_Controller {
       redirect('admin/pengajuanbaru');
    }
 
-   public function caripengajuan($nilai)
+   public function filterpengajuan()
    {
-      if($nilai != "zero") {
-         $pengajuan = $this->AdminModel->searchPengajuan($nilai);
-         echo json_encode($pengajuan);
-      } else {
-         $pengajuan = $this->db->select('*')->from($this->_pengajuan)
-            ->join('user', 'user.id_user = pengajuan.id_user')
-            ->order_by('pengajuan.id_pengajuan', 'DESC')
-            ->get()->result();
-         echo json_encode($pengajuan);
-      }
+      $hasil = $this->AdminModel->setFilterPengajuan($this->input->post('nilai'));
+      echo json_encode($hasil);
    }
 
    // -------------------------------------------------------------- transaksi pengajuan
@@ -195,6 +187,18 @@ class Admin extends CI_Controller {
       redirect('admin/transaksipengajuan');
    }
 
+   public function filtertransaksi()
+   {
+      $hasil = $this->AdminModel->setFilterTransaksi($this->input->post('nilai'));
+      echo json_encode($hasil);
+   }
+   
+   public function pencarianTransaksi()
+   {
+      $hasil = $this->AdminModel->searchTransaksi($this->input->post('nilai'));
+      echo json_encode($hasil);
+   }
+
    // -------------------------------------------------------------- histori pengajuan
 
    public function historipengajuan()
@@ -240,5 +244,14 @@ class Admin extends CI_Controller {
       $this->load->view('themes/admin/footer');
    }
    
-   
+   public function downloadPengajuanTransaksi($id)
+   {
+      $namaFile = $this->AdminModel->downloadPengajuanTransaksi($id);
+      force_download('uploads/'.$namaFile, NULL);
+   }
+   public function downloadPengajuanSPJ($id)
+   {
+      $namaFile = $this->AdminModel->downloadPengajuanSPJ($id);
+      force_download('uploads/'.$namaFile, NULL);
+   }
 }  

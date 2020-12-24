@@ -6,16 +6,17 @@
    </div>
 
    <div class="row">
-      <div class="input-group col-md-6 mb-3">
-         <div class="input-group-prepend">
-            <span class="input-group-text" id="basic-addon1"> <i class="fas fa-search"></i></span>
-         </div>
-         <input id="cariTransaksi" type="text" class="form-control" placeholder="Cari pengajuan...">
+      <div class="form-group col-md-6">
+         <label for="exampleFormControlInput1">Cari Pengajuan</label>
+         <input type="email" class="form-control" id="cariTransaksi" placeholder="Ketikan disini...">
       </div>
-      <div class="col-md-6">
-         <p class="mr-2 d-block d-md-inline">Berdasarkan tgl</p>
-         <input type="date">
-         <input type="date">
+      <div class="form-group col-md-6">
+         <label for="exampleFormControlSelect1">Filter Berdasarkan Status</label>
+         <select class="form-control" id="statusTransaksi">
+            <option value="Sedang Berjalan">Sedang Berjalan</option>
+            <option value="Menyerahkan SPJ">Menyerahkan SPJ</option>
+            <option value="Revisi SPJ">Revisi</option>
+         </select>
       </div>
    </div>
 
@@ -82,7 +83,7 @@
                               <?php if ($tr->STATUS_TPENGAJUAN === 'Menyerahkan SPJ') : ?>
                               <a href="<?= site_url('admin/downloadSpj/'.$tr->ID_TPENGAJUAN)?>"
                                  class="btn btn-sm btn-primary">Download SPJ</a>
-                              <button id="bRevisi" class="btn btn-sm btn-warning" data-toggle="modal"
+                              <button class="bRevisi btn btn-sm btn-warning" data-toggle="modal"
                                  data-target="#modalRevisi" value="<?= $tr->ID_TPENGAJUAN?>">Revisi</button>
                               <a href="<?= site_url('admin/setujuiSpj/'.$tr->ID_TPENGAJUAN)?>"
                                  onclick="return confirm('apakah kamu yakin mensetujui spj kegiatan <?= $tr->NAMA_ACARA?> ?')"
@@ -141,8 +142,152 @@
 
 <script>
 $(document).ready(function() {
-   $("#bRevisi").click(function() {
-      $('#idRevisi').val($('#bRevisi').val());
+
+   $("#tBodyTransaksi").on("click", "button.bRevisi", function() {
+      $('#idRevisi').val($(this).val());
+      // $('#coba').text($(this).val());
+   });
+
+   // filter status
+   $("#statusTransaksi").change(function() {
+      const nilai = $(this).val();
+      $.post("<?= site_url('admin/filtertransaksi')?>", {
+         nilai: nilai
+      }, function(data) {
+
+         let output = '';
+         let statusRevisi = '';
+         let statusTpengajuan = '';
+         let statusTpengajuan2 = '';
+
+         const monthNames = ["January", "February", "March", "April", "May", "June",
+            "July", "August", "September", "October", "November", "December"
+         ];
+
+         $("#tBodyTransaksi").empty();
+         data.map((data, index) => {
+            const tglAcara = new Date(`${data.TGL_ACARA}`);
+            const tglRevSpj = new Date(`${data.TGL_REV_SPJ}`);
+
+            if (data.TGL_REV_SPJ === null) {
+               statusRevisi = `<td>Belum Revisi</td>`;
+            } else {
+               statusRevisi =
+                  `<td>${tglRevSpj.getDate()} ${monthNames[tglRevSpj.getMonth()]} ${tglRevSpj.getFullYear()}</td>`;
+            }
+
+            if (data.STATUS_TPENGAJUAN === 'Sedang Berjalan') {
+               statusTpengajuan =
+                  `<td class="text-secondary"><i class="fas fa-hourglass-half"></i> Sedang Berjalan</td>`;
+            } else if (data.STATUS_TPENGAJUAN === 'Revisi SPJ') {
+               statusTpengajuan =
+                  `<td class="text-warning "><i class="fas fa-undo"></i> Revisi SPJ</td>`;
+            } else {
+               statusTpengajuan =
+                  `<td class="text-success"><i class="far fa-file-pdf"></i> Menyerahkan SPJ</td>`;
+            }
+
+            if (data.STATUS_TPENGAJUAN === 'Menyerahkan SPJ') {
+               statusTpengajuan2 = `
+               <a href="<?= site_url('admin/downloadSpj/').'${data.ID_TPENGAJUAN}'?>" class="btn btn-sm btn-primary">Download SPJ</a>
+               <button class="bRevisi btn btn-sm btn-warning" data-toggle="modal" data-target="#modalRevisi" value="${data.ID_TPENGAJUAN}">Revisi</button>
+               <a href="<?= site_url('admin/setujuiSpj/').'${data.ID_TPENGAJUAN}'?>"
+                  onclick="return confirm('apakah kamu yakin mensetujui spj kegiatan ${data.NAMA_ACARA} ?')"
+                  class="btn btn-sm btn-success">Selesai</a>`;
+            } else {
+               statusTpengajuan2 =
+                  `<span class="text-info font-weight-bold">Menunggu SPJ</span>`;
+            }
+
+            if (data.STATUS_TPENGAJUAN !== 'Selesai') {
+               output += `
+                  <tr>
+                     <td>${index+1}</td>
+                     <td>${data.NAMA_UKM}</td>
+                     <td>${data.NAMA_ACARA}</td>
+                     <td>${tglAcara.getDate()} ${monthNames[tglAcara.getMonth()]} ${tglAcara.getFullYear()}</td>
+                     ${statusRevisi}
+                     ${statusTpengajuan}
+                     <td>${statusTpengajuan2}</td>
+                  </tr>
+               `;
+            }
+         })
+         $("#tBodyTransaksi").append(output);
+      }, "json");
+   });
+
+
+   // pencarian
+   $("#cariTransaksi").keyup(function() {
+      const nilai = $(this).val();
+      $.post("<?= site_url('admin/pencarianTransaksi')?>", {
+         nilai: nilai
+      }, function(data) {
+         let output = '';
+         let statusRevisi = '';
+         let statusTpengajuan = '';
+         let statusTpengajuan2 = '';
+
+         const monthNames = ["January", "February", "March", "April", "May", "June",
+            "July", "August", "September", "October", "November", "December"
+         ];
+
+         $("#tBodyTransaksi").empty();
+         data.map((data, index) => {
+            const tglAcara = new Date(`${data.TGL_ACARA}`);
+            const tglRevSpj = new Date(`${data.TGL_REV_SPJ}`);
+
+            if (data.TGL_REV_SPJ === null) {
+               statusRevisi = `<td>Belum Revisi</td>`;
+            } else {
+               statusRevisi =
+                  `<td>${tglRevSpj.getDate()} ${monthNames[tglRevSpj.getMonth()]} ${tglRevSpj.getFullYear()}</td>`;
+            }
+
+            if (data.STATUS_TPENGAJUAN === 'Sedang Berjalan') {
+               statusTpengajuan =
+                  `<td class="text-secondary"><i class="fas fa-hourglass-half"></i> Sedang Berjalan</td>`;
+            } else if (data.STATUS_TPENGAJUAN === 'Revisi SPJ') {
+               statusTpengajuan =
+                  `<td class="text-warning "><i class="fas fa-undo"></i> Revisi SPJ</td>`;
+            } else {
+               statusTpengajuan =
+                  `<td class="text-success"><i class="far fa-file-pdf"></i> Menyerahkan SPJ</td>`;
+            }
+
+            if (data.STATUS_TPENGAJUAN === 'Menyerahkan SPJ') {
+               statusTpengajuan2 = `
+               <a href="<?= site_url('admin/downloadSpj/').'${data.ID_TPENGAJUAN}'?>" class="btn btn-sm btn-primary">Download SPJ</a>
+               <button class="bRevisi btn btn-sm btn-warning" data-toggle="modal" data-target="#modalRevisi" value="${data.ID_TPENGAJUAN}">Revisi</button>
+               <a href="<?= site_url('admin/setujuiSpj/').'${data.ID_TPENGAJUAN}'?>"
+                  onclick="return confirm('apakah kamu yakin mensetujui spj kegiatan ${data.NAMA_ACARA} ?')"
+                  class="btn btn-sm btn-success">Selesai</a>`;
+            } else {
+               statusTpengajuan2 =
+                  `<span class="text-info font-weight-bold">Menunggu SPJ</span>`;
+            }
+
+            if (data.STATUS_TPENGAJUAN !== 'Selesai') {
+               output += `
+                  <tr>
+                     <td>${index+1}</td>
+                     <td>${data.NAMA_UKM}</td>
+                     <td>${data.NAMA_ACARA}</td>
+                     <td>${tglAcara.getDate()} ${monthNames[tglAcara.getMonth()]} ${tglAcara.getFullYear()}</td>
+                     ${statusRevisi}
+                     ${statusTpengajuan}
+                     <td>${statusTpengajuan2}</td>
+                  </tr>
+               `;
+            }
+         })
+         $("#tBodyTransaksi").append(output);
+      }, "json");
+
+
+
+
    });
 
 });
