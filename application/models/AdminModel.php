@@ -9,9 +9,14 @@ class AdminModel extends CI_Model {
    {
       $pengajuanBaru = $this->db->from($this->_pengajuan)->count_all_results();
       $revisiPengajuan = $this->db->select_sum('JUMLAH_REV')->get('pengajuan')->row()->JUMLAH_REV;
+      $pengajuanProses = $this->db->from($this->_tpengajuan)->get()->num_rows();
+      $total = $this->db->from($this->_tpengajuan)->where('STATUS_TPENGAJUAN','Selesai')->get()->num_rows();
+
       $data = array(
          "pengajuanbaru" => $pengajuanBaru,
          "revisipengajuan" => $revisiPengajuan,
+         "totalProses" => $pengajuanProses,
+         "total" => $total,
       );
 
       return $data;

@@ -35,7 +35,7 @@
                   <div class="col mr-2">
                      <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">Revisi Pengajuan
                      </div>
-                     <div class="h5 mb-0 font-weight-bold text-gray-800"><?= $revisipengajuan?></div>
+                     <div class="h5 mb-0 font-weight-bold text-gray-800"><?= $revisipengajuan?></div> <!-- ini sudah dinamis -->
                   </div>
                   <div class="col-auto">
                      <i class="fas fa-undo fa-2x text-gray-300"></i>
@@ -53,7 +53,7 @@
                   <div class="col mr-2">
                      <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
                         Pengajuan Diproses</div>
-                     <div class="h5 mb-0 font-weight-bold text-gray-800">6</div>
+                     <div class="h5 mb-0 font-weight-bold text-gray-800"><?= $totalProses?></div> <!-- datanya belum dinamis -->
                   </div>
                   <div class="col-auto">
                      <i class="fas fa-user-check fa-2x text-gray-300"></i>
@@ -71,7 +71,9 @@
                      <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
                         Total Pengajuan
                      </div>
-                     <div class="h5 mb-0 font-weight-bold text-gray-800">156</div>
+                     <div class="h5 mb-0 font-weight-bold text-gray-800">
+                     <?= $total?>
+                     </div> <!-- datanya belum dinamis -->
                   </div>
                   <div class="col-auto">
                      <i class="fas fa-file fa-2x text-gray-300"></i>
