@@ -14,6 +14,7 @@
       rel="stylesheet">
    <link href="<?= base_url('assets/admin/css/sb-admin-2.min.css')?>" rel="stylesheet">
    <script src="<?= base_url('assets/admin/vendor/jquery/jquery.min.js')?>"></script>
+   <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js"></script>
 </head>
 
 <body id="page-top">
@@ -24,9 +25,9 @@
 
          <!-- Sidebar - Brand -->
          <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
-            <div class="sidebar-brand-icon rotate-n-15">
+            <!-- <div class="sidebar-brand-icon rotate-n-15">
                <i class="fas fa-laugh-wink"></i>
-            </div>
+            </div> -->
             <div class="sidebar-brand-text mx-3">Hai <?=$this->session->userdata('NAMA_USER')?></div>
          </a>
 

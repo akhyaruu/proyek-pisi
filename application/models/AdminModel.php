@@ -22,6 +22,11 @@ class AdminModel extends CI_Model {
       return $data;
    }
 
+   public function getGraph()
+   {
+      return $this->db->from($this->_tpengajuan)->get()->result();
+   }
+
    public function getAllPengajuan($limit, $start)
    {
       return $this->db->select('*')->from($this->_pengajuan)
@@ -49,7 +54,8 @@ class AdminModel extends CI_Model {
       $data = array(
          'ID_PENGAJUAN' => $id,
          'STATUS_TPENGAJUAN' => 'Sedang Berjalan',
-         'JUMLAH_REV_SPJ' => 0
+         'JUMLAH_REV_SPJ' => 0,
+         'CREATED_AT' => date("Y-m-d")
       );
       $this->db->insert($this->_tpengajuan, $data);
       return 'Pengajuan berhasil disetujui';

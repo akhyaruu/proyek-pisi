@@ -22,6 +22,12 @@ class Admin extends CI_Controller {
       $this->load->view('themes/admin/footer');
    }
 
+   public function graphpengajuan()
+   {
+      $hasil = $this->AdminModel->getGraph();
+      echo json_encode($hasil);
+   }
+
    // -------------------------------------------------------------- pengajuan baru
 
    public function pengajuanbaru() 
