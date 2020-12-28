@@ -27,7 +27,7 @@
    <?php endif; ?>
    <div class="card shadow-sm mt-3">
       <div class="card-body">
-         <div class="table-responsive-md">
+         
             <table class="table table-bordered mt-3">
                <thead>
                   <tr>
@@ -82,7 +82,7 @@
             <?= $this->pagination->create_links(); ?>
            </div>
          </div>
-      </div> 
+      
    
 
    <!-- logout -->
