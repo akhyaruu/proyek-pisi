@@ -142,7 +142,7 @@ $(document).ready(function() {
       const data = JSON.parse(response);
       const currentYear = new Date().getFullYear();
       data.map((data) => {
-         const jsDate = new Date(data.CREATED_AT).toString();
+         const jsDate = new Date(data.TGL_P_DISETUJUI).toString();
          let splited = jsDate.split(" ");
          if (splited[3] == currentYear) {
             if (splited[1] == "Jan") {

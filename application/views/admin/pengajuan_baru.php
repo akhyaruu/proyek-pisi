@@ -37,7 +37,7 @@
       <div class="col-md-12">
          <div class="card shadow-sm">
             <div class="card-body">
-               <div class="table-responsive-md">
+               <div class="table-responsive">
                   <table class="table">
                      <thead class="thead-dark">
                         <tr>
