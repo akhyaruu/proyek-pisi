@@ -35,7 +35,11 @@
                   <div class="col mr-2">
                      <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">Revisi Pengajuan
                      </div>
+                     <?php if (empty($revisipengajuan)) : ?>
+                     <div class="h5 mb-0 font-weight-bold text-gray-800">0</div>
+                     <?php else : ?>
                      <div class="h5 mb-0 font-weight-bold text-gray-800"><?= $revisipengajuan?></div>
+                     <?php endif; ?>
                      <!-- ini sudah dinamis -->
                   </div>
                   <div class="col-auto">

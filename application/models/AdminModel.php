@@ -61,8 +61,7 @@ class AdminModel extends CI_Model {
       $data = array(
          'ID_PENGAJUAN' => $id,
          'STATUS_TPENGAJUAN' => 'Sedang Berjalan',
-         'JUMLAH_REV_SPJ' => 0,
-         'CREATED_AT' => date("Y-m-d")
+         'JUMLAH_REV_SPJ' => 0
       );
       $this->db->insert($this->_tpengajuan, $data);
       return 'Pengajuan berhasil disetujui';
