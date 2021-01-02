@@ -82,7 +82,7 @@
                               <button class="bRevisi btn btn-sm btn-warning" data-toggle="modal"
                                  data-target="#modalRevisi" value="<?= $pj->ID_PENGAJUAN?>">Revisi</button>
                               <a target="_blank" href="https://wa.me/<?= $pj->NO_TLP?>"
-                                 class="btn btn-sm btn-success">Chat
+                                 class="btn btn-sm btn-primary">Chat
                                  WA</a>
                               <?php if ($pj->STATUS_PENGAJUAN !== 'Revisi') : ?>
                               <a href="<?= site_url('admin/hapusPengajuan/'.$pj->ID_PENGAJUAN)?>"
@@ -197,7 +197,7 @@ $(document).ready(function() {
                   <td>
                      ${bAksi}
                      <button class="bRevisi btn btn-sm btn-warning" data-toggle="modal" data-target="#modalRevisi" value="${data.ID_PENGAJUAN}">Revisi</button>
-                     <a target="_blank" href="https://wa.me/${data.NO_TLP}"class="btn btn-sm btn-success">Chat WA</a>
+                     <a target="_blank" href="https://wa.me/${data.NO_TLP}"class="btn btn-sm btn-primary">Chat WA</a>
                      ${bDelete}
                   </td>
                </tr>
