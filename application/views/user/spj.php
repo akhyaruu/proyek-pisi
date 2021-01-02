@@ -32,6 +32,8 @@
                      <th scope="col" class="table-dark">Nama Kegiatan</th>
                      <th scope="col" class="table-dark">Tgl Kegiatan</th>
                      <th scope="col" class="table-dark">Status</th>
+                     <th scope="col" class="table-dark">Tgl Revisi</th>
+                     <th scope="col" class="table-dark">Jumlah Revisi</th>
                      <th scope="col" class="table-dark">Upload</th>
                   </tr>
                </thead>
@@ -51,7 +53,8 @@
                                     <?php else : ?>
                                     <td class="text-success"><i class="far fa-file-pdf"></i> Menyerahkan SPJ</td>
                                     <?php endif; ?>
-                     
+                     <td><?= $pj['TGL_REV_SPJ']?></td>
+                     <td><?= $pj['JUMLAH_REV_SPJ']?></td>
                      <td>
                      <?php if ($pj['STATUS_TPENGAJUAN'] == 'Sedang Berjalan') : ?>
                      <a href="<?=base_url(); ?>user/uploadSpj/<?= $pj['ID_TPENGAJUAN']; ?>"  class="badge badge-primary ml-1 tampilModalSpj" data-toggle="modal"

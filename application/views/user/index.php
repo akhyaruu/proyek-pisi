@@ -24,11 +24,13 @@
       <?= $this->session->flashdata('pesan'); ?>
 
    </div>
+</div>
    <?php endif; ?>
-   <div class="card shadow-sm mt-3">
-      <div class="card-body">
-         
-            <table class="table table-bordered mt-3">
+<div class="row mt-3">  
+<div class="col-md-12">
+<div class="card">
+<div class="card-body">
+            <table class="table table-bordered">
                <thead>
                   <tr>
                      <th scope="col" class="table-dark">No</th>
@@ -36,6 +38,8 @@
                      <th scope="col" class="table-dark">Nama Kegiatan</th>
                      <th scope="col" class="table-dark">Tgl Kegiatan</th>
                      <th scope="col" class="table-dark">Status</th>
+                     <th scope="col" class="table-dark">Tgl Revisi</th>
+                     <th scope="col" class="table-dark">Jumlah Revisi</th>
                      <th scope="col" class="table-dark">Upload / Aksi</th>
                   </tr>
                </thead>
@@ -55,7 +59,8 @@
                      <?php else :?>
                      <td class="text-success"><i class="fas fa-check"></i>Disetujui</td>
                      <?php endif; ?>
-
+                     <td><?= $pj['TGL_REV_PENGAJUAN']?></td>
+                     <td><?= $pj['JUMLAH_REV']?></td>
                      <td>
                         <?php if ($pj['STATUS_PENGAJUAN'] !== 'Disetujui' && $pj['STATUS_PENGAJUAN'] !== 'Revisi' &&  $pj['STATUS_PENGAJUAN'] !== 'Menyerahkan Revisi') : ?>
                         <a href="<?=base_url(); ?>user/hapus/<?= $pj['ID_PENGAJUAN']; ?>" n
@@ -80,15 +85,16 @@
                </tbody>
             </table>
             <?= $this->pagination->create_links(); ?>
-           </div>
-         </div>
-      
+       </div>
+       </div>
+       </div>
    
 
    <!-- logout -->
    
 
-</div>
+</>
+
 
 <div class="modal fade" id="formModal" tabindex="-1" aria-labelledby="judulModal" aria-hidden="true">
    <div class="modal-dialog">
