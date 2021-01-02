@@ -5,15 +5,16 @@
       <h1 class="h3 mb-0 text-gray-800">Histori Transaksi Pengajuan</h1>
    </div>
 
-   <!-- <a href="#" class="d-none mb-3 mt-1 d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
-         class="fas fa-download fa-sm text-white-50"></i> Buat laporan</a> -->
+   <a href="<?= site_url('admin/excel')?>"
+      class="d-none mb-3 mt-1 d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
+         class="fas fa-download fa-sm text-white-50"></i> Buat laporan</a>
    <!-- Content Row -->
    <div class="row mb-5">
       <div class="col-md-12">
          <div class="card shadow-sm">
             <div class="card-body">
-               <div class="table-responsive-md">
-                  <table class="table">
+               <div class="table-responsive">
+                  <table class="table display" id="tableHistori">
                      <thead class="thead-dark">
                         <tr>
                            <th scope="col">No.</th>
@@ -21,6 +22,7 @@
                            <th scope="col">UKM</th>
                            <th scope="col">Kegiatan</th>
                            <th scope="col">Tgl Acara</th>
+                           <th scope="col">Tgl Selesai</th>
                            <th scope="col">Total Revisi</th>
                            <th scope="col">Status</th>
                            <th scope="col">Download File</th>
@@ -36,6 +38,7 @@
                            <td><?= $ht->NAMA_UKM?></td>
                            <td><?= $ht->NAMA_ACARA?></td>
                            <td><?= date('d F Y', strtotime($ht->TGL_ACARA))?></td>
+                           <td><?= date('d F Y', strtotime($ht->TGL_T_DISETUJUI))?></td>
                            <td><?= $ht->JUMLAH_REV + $ht->JUMLAH_REV_SPJ?></td>
                            <td class="text-success"><i class="fas fa-check"></i> <?= $ht->STATUS_TPENGAJUAN?></td>
                            <td>
@@ -51,7 +54,6 @@
                      </tbody>
                   </table>
                </div>
-               <?= $this->pagination->create_links(); ?>
 
             </div>
          </div>
@@ -65,3 +67,9 @@
 
 </div>
 <!-- End of Main Content -->
+
+<script>
+$(document).ready(function() {
+   $('#tableHistori').DataTable();
+});
+</script>

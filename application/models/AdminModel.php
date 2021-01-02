@@ -9,7 +9,7 @@ class AdminModel extends CI_Model {
    {
       $pengajuanBaru = $this->db->from($this->_pengajuan)->count_all_results();
       $revisiPengajuan = $this->db->select_sum('JUMLAH_REV')->get('pengajuan')->row()->JUMLAH_REV;
-      $pengajuanProses = $this->db->from($this->_tpengajuan)->get()->num_rows();
+      $pengajuanProses = $this->db->from($this->_tpengajuan)->where('STATUS_TPENGAJUAN !=','Selesai')->get()->num_rows();
       $total = $this->db->from($this->_tpengajuan)->where('STATUS_TPENGAJUAN','Selesai')->get()->num_rows();
 
       $data = array(
@@ -24,7 +24,10 @@ class AdminModel extends CI_Model {
 
    public function getGraph()
    {
-      return $this->db->from($this->_tpengajuan)->get()->result();
+      return $this->db->from($this->_tpengajuan)
+         ->join('pengajuan', 'pengajuan.ID_PENGAJUAN = transaksipengajuan.ID_PENGAJUAN')
+         ->where('TGL_P_DISETUJUI !=', NULL)
+         ->get()->result();
    }
 
    public function getAllPengajuan($limit, $start)
@@ -50,12 +53,15 @@ class AdminModel extends CI_Model {
 
    public function setAgreePengajuan($id)
    {
-      $this->db->where('ID_PENGAJUAN', $id)->update($this->_pengajuan, array('STATUS_PENGAJUAN' => 'Disetujui'));
+      $this->db->where('ID_PENGAJUAN', $id)->update($this->_pengajuan, array(
+         'STATUS_PENGAJUAN' => 'Disetujui',
+         'TGL_P_DISETUJUI' => date("Y-m-d")
+      ));
+      
       $data = array(
          'ID_PENGAJUAN' => $id,
          'STATUS_TPENGAJUAN' => 'Sedang Berjalan',
-         'JUMLAH_REV_SPJ' => 0,
-         'CREATED_AT' => date("Y-m-d")
+         'JUMLAH_REV_SPJ' => 0
       );
       $this->db->insert($this->_tpengajuan, $data);
       return 'Pengajuan berhasil disetujui';
@@ -69,7 +75,8 @@ class AdminModel extends CI_Model {
       $data = array(
          'STATUS_PENGAJUAN' => 'Revisi',
          'URL_PENGAJUAN' => $namaBerkas,
-         'JUMLAH_REV' => $totalRevisi + 1
+         'JUMLAH_REV' => $totalRevisi + 1,
+         'TGL_REV_PENGAJUAN' => date("Y-m-d")
       ); 
       $this->db->where('ID_PENGAJUAN', $id)->update($this->_pengajuan, $data);
       return 'Revisi kegiatan '.$kegiatan. ' berhasil dikirim';
@@ -130,7 +137,10 @@ class AdminModel extends CI_Model {
 
    public function setAgreeSpj($id)
    {
-      $this->db->where('ID_TPENGAJUAN', $id)->update($this->_tpengajuan, array('STATUS_TPENGAJUAN' => 'Selesai'));
+      $this->db->where('ID_TPENGAJUAN', $id)->update($this->_tpengajuan, array(
+         'STATUS_TPENGAJUAN' => 'Selesai',
+         'TGL_T_DISETUJUI' => date("Y-m-d")
+      ));
       return 'SPJ berhasil disetujui, kegiatan telah selesai';
    }
 
@@ -157,12 +167,11 @@ class AdminModel extends CI_Model {
 
    // ------------------------------------------------------- histori transaksi
 
-   public function getAllHistori($limit, $start)
+   public function getAllHistori()
    {
       return $this->db->select('*')->from($this->_tpengajuan)
          ->join('pengajuan', 'pengajuan.ID_PENGAJUAN = transaksipengajuan.ID_PENGAJUAN')
          ->join('user', 'user.ID_USER = pengajuan.ID_USER')
-         ->limit($limit, $start)
          ->order_by('transaksipengajuan.ID_TPENGAJUAN', 'DESC')
          ->get()->result();
    }
@@ -187,4 +196,13 @@ class AdminModel extends CI_Model {
       return $this->db->get_where('transaksipengajuan', ["ID_TPENGAJUAN" => $id])->row()->URL_SPJ; 
    }
 
+   public function getAll()
+   {
+      return $this->db->select('*')->from($this->_tpengajuan)
+         ->join('pengajuan', 'pengajuan.ID_PENGAJUAN = transaksipengajuan.ID_PENGAJUAN')
+         ->join('user', 'user.ID_USER = pengajuan.ID_USER')
+         ->join('fakultas', 'fakultas.ID_FAKULTAS = user.ID_FAKULTAS')
+         ->order_by('transaksipengajuan.TGL_T_DISETUJUI', 'DESC')
+         ->get()->result();
+   }
 }

@@ -42,7 +42,7 @@
       <div class="col-md-12">
          <div class="card shadow-sm">
             <div class="card-body">
-               <div class="table-responsive-md">
+               <div class="table-responsive">
                   <table class="table">
                      <thead class="thead-dark">
                         <tr>
@@ -50,6 +50,7 @@
                            <th scope="col">UKM</th>
                            <th scope="col">Kegiatan</th>
                            <th scope="col">Tgl Acara</th>
+                           <th scope="col">Tgl Disetujui</th>
                            <th scope="col">Tgl Revisi</th>
                            <th scope="col">Status</th>
                            <th scope="col">Aksi</th>
@@ -65,6 +66,7 @@
                            <td><?= $tr->NAMA_UKM?></td>
                            <td><?= $tr->NAMA_ACARA?></td>
                            <td><?= date('d F Y', strtotime($tr->TGL_ACARA))?></td>
+                           <td><?= date('d F Y', strtotime($tr->TGL_P_DISETUJUI))?></td>
                            <?php if ($tr->TGL_REV_SPJ === null) : ?>
                            <td>Belum Revisi</td>
                            <?php else : ?>
@@ -167,6 +169,7 @@ $(document).ready(function() {
          $("#tBodyTransaksi").empty();
          data.map((data, index) => {
             const tglAcara = new Date(`${data.TGL_ACARA}`);
+            const tglDisetujui = new Date(`${data.TGL_P_DISETUJUI}`);
             const tglRevSpj = new Date(`${data.TGL_REV_SPJ}`);
 
             if (data.TGL_REV_SPJ === null) {
@@ -206,6 +209,7 @@ $(document).ready(function() {
                      <td>${data.NAMA_UKM}</td>
                      <td>${data.NAMA_ACARA}</td>
                      <td>${tglAcara.getDate()} ${monthNames[tglAcara.getMonth()]} ${tglAcara.getFullYear()}</td>
+                     <td>${tglDisetujui.getDate()} ${monthNames[tglDisetujui.getMonth()]} ${tglDisetujui.getFullYear()}</td>
                      ${statusRevisi}
                      ${statusTpengajuan}
                      <td>${statusTpengajuan2}</td>
@@ -236,6 +240,7 @@ $(document).ready(function() {
          $("#tBodyTransaksi").empty();
          data.map((data, index) => {
             const tglAcara = new Date(`${data.TGL_ACARA}`);
+            const tglDisetujui = new Date(`${data.TGL_P_DISETUJUI}`);
             const tglRevSpj = new Date(`${data.TGL_REV_SPJ}`);
 
             if (data.TGL_REV_SPJ === null) {
@@ -275,6 +280,7 @@ $(document).ready(function() {
                      <td>${data.NAMA_UKM}</td>
                      <td>${data.NAMA_ACARA}</td>
                      <td>${tglAcara.getDate()} ${monthNames[tglAcara.getMonth()]} ${tglAcara.getFullYear()}</td>
+                     <td>${tglDisetujui.getDate()} ${monthNames[tglDisetujui.getMonth()]} ${tglDisetujui.getFullYear()}</td>
                      ${statusRevisi}
                      ${statusTpengajuan}
                      <td>${statusTpengajuan2}</td>
