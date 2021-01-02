@@ -203,6 +203,7 @@ class AdminModel extends CI_Model {
          ->join('user', 'user.ID_USER = pengajuan.ID_USER')
          ->join('fakultas', 'fakultas.ID_FAKULTAS = user.ID_FAKULTAS')
          ->order_by('transaksipengajuan.TGL_T_DISETUJUI', 'DESC')
+         ->where('transaksipengajuan.STATUS_TPENGAJUAN', 'Selesai')
          ->get()->result();
    }
 }
